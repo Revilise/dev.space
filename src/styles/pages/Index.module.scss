@@ -1,0 +1,103 @@
+@import "src/styles/mixins/grid.mixin.scss";
+@import "src/styles/mixins/flex.mixin.scss";
+
+.container {
+  padding: 84px 96px;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+.header {
+  grid-column-start: 1;
+  grid-column-end: 13;
+  height: fit-content;
+  @include grid;
+  .logo {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+  .navigation {
+    grid-column-start: 5;
+    grid-column-end: 11;
+    display: flex;
+    gap: 64px;
+    font-weight: 300;
+  }
+}
+.aside {
+  grid-column-start: 13;
+  grid-column-end: 17;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  height: 100%;
+
+  & > .button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 48px;
+    width: auto;
+    border: none !important;
+  }
+
+  .form {
+    @include flex-column;
+    align-content: flex-end;
+    gap: 22px;
+    .button {
+      width: auto;
+      justify-content: center;
+      &:hover + .button-backround {
+        transform:
+                translateY(-6px)
+                translateX(6px);
+      }
+    }
+    .button-backround {
+      content: "";
+      display: block;
+      position: relative;
+      z-index: -1;
+      height: 58px;
+      width: 100%;
+      transition: .3s;
+      background: linear-gradient(93.64deg, var(--intro-button-background-start) 14.45%,
+                      var(--intro-button-background-end) 93.31%),
+      var(--intro-button-background-base);
+
+      border-radius: 36px;
+      top: -22px - 58px + 6px;
+      right: 6px;
+    }
+
+    .link {
+      text-align: right;
+      color: var(--blue-hex);
+    }
+  }
+}
+.main {
+  grid-column-start: 1;
+  grid-column-end: 13;
+  @include flex-column;
+  color: var(--light-hex);
+  gap: 16px;
+  .button {
+    color: var(--light-hex);
+    border: 2px solid var(--light-hex) !important;
+  }
+}
+.wide {
+  grid-column-start: 1;
+  grid-column-end: 13;
+
+}
+
+.button {
+  padding: 16px;
+  border: 2px solid rgb(var(--foreground-rgb)) !important;
+  border-radius: 36px;
+  width: fit-content;
+
+  display: flex;
+  gap: 64px;
+}

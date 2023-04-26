@@ -1,0 +1,20 @@
+@import "src/styles/mixins/grid.mixin.scss";
+
+@mixin basic-layout {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.layout {
+  @include basic-layout;
+}
+
+.layout-grid {
+  @include basic-layout;
+  @include grid;
+}
+
+.layout-flex {
+  @include basic-layout;
+  display: flex;
+}
