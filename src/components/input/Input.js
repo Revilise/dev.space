@@ -1,8 +1,8 @@
-export default function Input({value, onChange, label = null}) {
+export default function Input({value, onChange, name, placeholder, required, type = "text", label = null}) {
     return (
         <div>
             {label? <label>{label}</label> : <></>}
-            <input value={value} onChange={onChange} />
+            <input required={true} value={value} name={name} placeholder={placeholder} type={type} onChange={onChange} />
         </div>
     )
 }

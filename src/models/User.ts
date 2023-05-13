@@ -24,4 +24,8 @@ export class User {
 
         return user;
     }
+
+    toObject():object {
+        return JSON.parse(JSON.stringify(this));
+    }
 }
