@@ -7,7 +7,10 @@ export default async function TestAPIRoute(
     res: NextApiResponse
 ) {
 
-    await UserController.delete(3);
+    const user = new User();
+    user.password = "123";
+    // await UserController.delete(3);
+    await UserController.insert(user);
     let data = await UserController.getAll();
 
     res.json(data);
