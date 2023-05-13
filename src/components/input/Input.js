@@ -1,17 +1,8 @@
-import css from './input.module.scss'
-
-export default function Input({
-    value,
-    placeholder = "",
-    onChange = new Function(),
-    className = "",
-    label
-})
-{
+export default function Input({value, onChange, label = null}) {
     return (
-        <div className={css.container}>
-            { label ? <label>{label}</label> : <></> }
-            <input value={value} onChange={onChange} placeholder={placeholder} className={`${css.input} ${className}`.trim()} />
+        <div>
+            {label? <label>{label}</label> : <></>}
+            <input value={value} onChange={onChange} />
         </div>
     )
 }
