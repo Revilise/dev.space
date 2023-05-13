@@ -1,6 +1,7 @@
 import {IController} from "@/controllers/IController";
 import {User} from "@/models/User";
 import {pool} from '@/databases/postgesql/db-connection';
+import {QueryConfig} from "pg";
 
 class UserController implements IController<User> {
     Delete(id: number): Promise<User> {
@@ -12,7 +13,16 @@ class UserController implements IController<User> {
     }
 
     Update(id: number, object: User): Promise<User> {
-        return Promise.resolve(undefined);
+        const keys = Object.keys(object);
+        const props = keys
+                        .map((prop, idx) => `${prop} = $${idx + 1}`)
+                        .join(", ");
+
+        const text = `UPDATE users SET ${props} WHERE id = ${id}`;
+        const values = keys.map(key => object[key]);
+
+        const config: QueryConfig = {text, values};
+        return pool.query(config).then(data => object);
     }
 
     getAll(): Promise<User[]> {

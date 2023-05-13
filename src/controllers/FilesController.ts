@@ -2,25 +2,26 @@ import {IController} from "@/controllers/IController";
 import {File} from "@/models/File";
 
 class FilesController implements IController<File> {
-    Delete(id: number): File {
-        return undefined;
+    Delete(id: number): Promise<File> {
+        return Promise.resolve(undefined);
     }
 
-    Insert(object: File): File {
-        return undefined;
+    Insert(object: File): Promise<File> {
+        return Promise.resolve(undefined);
     }
 
-    Update(id: number, object: File): File {
-        return undefined;
+    Update(id: number, object: File): Promise<File> {
+        return Promise.resolve(undefined);
     }
 
-    getAll(): File[] {
-        return [];
+    getAll(): Promise<File[]> {
+        return Promise.resolve([]);
     }
 
-    getById(id: number): File[] {
-        return [];
+    getById(id: number): Promise<File[]> {
+        return Promise.resolve([]);
     }
+
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export

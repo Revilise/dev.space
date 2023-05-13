@@ -5,6 +5,13 @@ export default async function TestAPIRoute(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const data = await UserController.getAll();
+    let data = await UserController.getAll();
+
+    const user = data[0];
+    user.nickname = "user";
+    await UserController.Update(1, user);
+
+     data = await UserController.getAll();
+
     res.json(data);
 }
