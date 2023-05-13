@@ -1,7 +1,11 @@
 export class User {
     constructor() {
-
+        const temp: User = this;
+        Object.defineProperty(temp, "id", {
+            enumerable: false
+        })
     }
+
     id: number = null
     firstname: string = null
     secondname: string = null
@@ -13,10 +17,6 @@ export class User {
 
     static Parse(object: any): User {
         const user = new User();
-
-        Object.defineProperty(user, "id", {
-            enumerable: false
-        })
 
         for (let prop in user) {
             user[prop] = object[prop];

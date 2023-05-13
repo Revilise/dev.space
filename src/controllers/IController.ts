@@ -1,7 +1,7 @@
 export interface IController<Type> {
-    getById(id: number) : Promise<Type[]>
+    getById(id: number) : Promise<Type>
     getAll() : Promise<Type[]>
-    Delete(id: number) : Promise<Type>
-    Update(id: number, object: Type) : Promise<Type>
-    Insert(object: Type) : Promise<Type>
+    delete(id: number) : Promise<boolean>
+    update(id: number, object: Type) : Promise<Type>
+    insert(object: Type) : Promise<Type>
 }
