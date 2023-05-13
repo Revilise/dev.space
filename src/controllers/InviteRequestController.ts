@@ -1,24 +1,24 @@
 import {IController} from "@/controllers/IController";
-import {InviteRequestEntity} from "@/models/InviteRequest.Entity";
+import {InviteRequest} from "@/models/InviteRequest";
 
-class InviteRequestController implements IController<InviteRequestEntity> {
-    Delete(id: number): InviteRequestEntity {
+class InviteRequestController implements IController<InviteRequest> {
+    Delete(id: number): InviteRequest {
         return undefined;
     }
 
-    Insert(object: InviteRequestEntity): InviteRequestEntity {
+    Insert(object: InviteRequest): InviteRequest {
         return undefined;
     }
 
-    Update(id: number, object: InviteRequestEntity): InviteRequestEntity {
+    Update(id: number, object: InviteRequest): InviteRequest {
         return undefined;
     }
 
-    getAll(): InviteRequestEntity[] {
+    getAll(): InviteRequest[] {
         return [];
     }
 
-    getById(id: number): InviteRequestEntity[] {
+    getById(id: number): InviteRequest[] {
         return [];
     }
 }

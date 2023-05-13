@@ -1,24 +1,24 @@
 import {IController} from "@/controllers/IController";
-import {ImageEntity} from "@/models/Image.entity";
+import {Image} from "@/models/Image";
 
-class ImagesController implements IController<ImageEntity> {
-    Delete(id: number): ImageEntity {
+class ImagesController implements IController<Image> {
+    Delete(id: number): Image {
         return undefined;
     }
 
-    Insert(object: ImageEntity): ImageEntity {
+    Insert(object: Image): Image {
         return undefined;
     }
 
-    Update(id: number, object: ImageEntity): ImageEntity {
+    Update(id: number, object: Image): Image {
         return undefined;
     }
 
-    getAll(): ImageEntity[] {
+    getAll(): Image[] {
         return [];
     }
 
-    getById(id: number): ImageEntity[] {
+    getById(id: number): Image[] {
         return [];
     }
 }

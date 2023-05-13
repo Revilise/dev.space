@@ -1,24 +1,24 @@
 import {IController} from "@/controllers/IController";
-import {ProjectFileEntity} from "@/models/ProjectFile.entity";
+import {ProjectFile} from "@/models/ProjectFile";
 
-class ProjectFilesController implements IController<ProjectFileEntity> {
-    Delete(id: number): ProjectFileEntity {
+class ProjectFilesController implements IController<ProjectFile> {
+    Delete(id: number): ProjectFile {
         return undefined;
     }
 
-    Insert(object: ProjectFileEntity): ProjectFileEntity {
+    Insert(object: ProjectFile): ProjectFile {
         return undefined;
     }
 
-    Update(id: number, object: ProjectFileEntity): ProjectFileEntity {
+    Update(id: number, object: ProjectFile): ProjectFile {
         return undefined;
     }
 
-    getAll(): ProjectFileEntity[] {
+    getAll(): ProjectFile[] {
         return [];
     }
 
-    getById(id: number): ProjectFileEntity[] {
+    getById(id: number): ProjectFile[] {
         return [];
     }
 }

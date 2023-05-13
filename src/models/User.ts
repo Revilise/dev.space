@@ -1,19 +1,24 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm"
+export class User {
+    constructor() {
 
-@Entity()
-export class User extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number
+    }
 
-    @Column()
-    firstName: string
+    id: number = null
+    firstname: string = null
+    secondname: string = null
+    lastname: string = null
+    nickname: string = null
+    email: string = null
+    password: string = null
+    imageid: number = 1
 
-    @Column()
-    lastName: string
+    static Parse(object: any): User {
+        const user = new User();
 
-    @Column()
-    email: string
+        for (let prop in user) {
+           user[prop] = object[prop];
+        }
 
-    @Column()
-    password: string
+        return user;
+    }
 }

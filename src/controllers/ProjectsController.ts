@@ -1,24 +1,24 @@
 import {IController} from "@/controllers/IController";
-import {ProjectEntity} from "@/models/Project.entity";
+import {Project} from "@/models/Project";
 
-class ProjectsController implements IController<ProjectEntity> {
-    Delete(id: number): ProjectEntity {
+class ProjectsController implements IController<Project> {
+    Delete(id: number): Project {
         return undefined;
     }
 
-    Insert(object: ProjectEntity): ProjectEntity {
+    Insert(object: Project): Project {
         return undefined;
     }
 
-    Update(id: number, object: ProjectEntity): ProjectEntity {
+    Update(id: number, object: Project): Project {
         return undefined;
     }
 
-    getAll(): ProjectEntity[] {
+    getAll(): Project[] {
         return [];
     }
 
-    getById(id: number): ProjectEntity[] {
+    getById(id: number): Project[] {
         return [];
     }
 }

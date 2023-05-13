@@ -1,24 +1,24 @@
 import {IController} from "@/controllers/IController";
-import {FileEntity} from "@/models/File.entity";
+import {File} from "@/models/File";
 
-class FilesController implements IController<FileEntity> {
-    Delete(id: number): FileEntity {
+class FilesController implements IController<File> {
+    Delete(id: number): File {
         return undefined;
     }
 
-    Insert(object: FileEntity): FileEntity {
+    Insert(object: File): File {
         return undefined;
     }
 
-    Update(id: number, object: FileEntity): FileEntity {
+    Update(id: number, object: File): File {
         return undefined;
     }
 
-    getAll(): FileEntity[] {
+    getAll(): File[] {
         return [];
     }
 
-    getById(id: number): FileEntity[] {
+    getById(id: number): File[] {
         return [];
     }
 }

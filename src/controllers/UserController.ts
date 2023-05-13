@@ -1,27 +1,26 @@
 import {IController} from "@/controllers/IController";
-import {UserEntity} from "@/models/User.entity";
-import {UsersRepository} from "@/databases/repositories/UsersRepository";
+import {User} from "@/models/User";
+import {pool} from '@/databases/postgesql/db-connection';
 
-class UserController implements IController<UserEntity> {
-    Delete(id: number): UserEntity {
-        return undefined;
+class UserController implements IController<User> {
+    Delete(id: number): Promise<User> {
+        return Promise.resolve(undefined);
     }
 
-    Insert(object: UserEntity): UserEntity {
-        return undefined;
+    Insert(object: User): Promise<User> {
+        return Promise.resolve(undefined);
     }
 
-    Update(id: number, object: UserEntity): UserEntity {
-        return undefined;
+    Update(id: number, object: User): Promise<User> {
+        return Promise.resolve(undefined);
     }
 
-    getAll(): UserEntity[] {
-        const a = UsersRepository.then(repo => repo.createQueryBuilder("user"))
-        return [];
+    getAll(): Promise<User[]> {
+        return pool.query("SELECT * FROM users").then(data => data.rows.map(row => User.Parse(row)));
     }
 
-    getById(id: number): UserEntity[] {
-        return [];
+    getById(id: number): Promise<User[]> {
+        return Promise.resolve([]);
     }
 }
 

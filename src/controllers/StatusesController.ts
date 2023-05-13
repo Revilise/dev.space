@@ -1,24 +1,24 @@
 import {IController} from "@/controllers/IController";
-import {StatusEntity} from "@/models/Status.entity";
+import {Status} from "@/models/Status";
 
-class StatusesController implements IController<StatusEntity> {
-    Delete(id: number): StatusEntity {
+class StatusesController implements IController<Status> {
+    Delete(id: number): Status {
         return undefined;
     }
 
-    Insert(object: StatusEntity): StatusEntity {
+    Insert(object: Status): Status {
         return undefined;
     }
 
-    Update(id: number, object: StatusEntity): StatusEntity {
+    Update(id: number, object: Status): Status {
         return undefined;
     }
 
-    getAll(): StatusEntity[] {
+    getAll(): Status[] {
         return [];
     }
 
-    getById(id: number): StatusEntity[] {
+    getById(id: number): Status[] {
         return [];
     }
 }
