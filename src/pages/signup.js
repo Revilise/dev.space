@@ -17,14 +17,18 @@ export default function SignupPage() {
 
     function OnFieldChange(e) {
         user[e.target.name] = e.target.value;
-        setUser(Object.assign({}, user));
+        setUser(Object.assign(new User(), user));
     }
 
     async function SendRegRequest() {
+
+        console.log(user?.toObject());
         mutateUser(
             await (async function() {
-                const res = await axios.post("http://localhost:3000/api/auth/logup",{user: user.toObject()})
-                if (res.isLogged) return res;
+                try {
+                    const res = await axios.post("http://localhost:3000/api/auth/logup", {user: user.toObject()})
+                    if (res.isLogged) return res;
+                } catch {}
             })()
         )
     }

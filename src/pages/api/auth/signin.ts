@@ -2,7 +2,6 @@ import UserController from "../../../controllers/UserController";
 import {NextApiRequest, NextApiResponse} from "next";
 import {withIronSessionApiRoute} from "iron-session/next";
 import {sessionOptions} from "@/lib/auth/session";
-import SignUpAPIRoute from "@/pages/api/auth/signup";
 
 function SignInAPIRoute(req: NextApiRequest, res: NextApiResponse) {
     const {email, password} = req.body;

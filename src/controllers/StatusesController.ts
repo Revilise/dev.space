@@ -1,25 +1,38 @@
 import {IController} from "@/controllers/IController";
 import {Status} from "@/models/Status";
+import {pool} from '@/databases/postgesql/db-connection';
+import {QueryConfig} from "pg";
 
 class StatusesController implements IController<Status> {
-    Delete(id: number): Status {
-        return undefined;
+    delete(id: number): Promise<boolean> {
+        const text = "DELETE FROM statuses WHERE id = $1";
+
+        return pool.query({text, values: [id]}).then(data => true);
     }
 
-    Insert(object: Status): Status {
-        return undefined;
+    getAll(): Promise<Status[]> {
+        return null;
     }
 
-    Update(id: number, object: Status): Status {
-        return undefined;
+    getById(id: number): Promise<Status> {
+        return Promise.resolve(undefined);
     }
 
-    getAll(): Status[] {
-        return [];
+    insert(object: Status): Promise<Status> {
+        const keys = Object.keys(object);
+
+        const props = keys.join(", ");
+        const values = keys.map(key => object[key]);
+
+        const text = `INSERT INTO statuses (${props}) VALUES(${values.map((el, idx) => `$${idx+1}`)}) RETURNING *`;
+
+        const config: QueryConfig = {text, values};
+
+        return pool.query(config).then(data => object);
     }
 
-    getById(id: number): Status[] {
-        return [];
+    update(id: number, object: Status): Promise<Status> {
+        return Promise.resolve(undefined);
     }
 }
 

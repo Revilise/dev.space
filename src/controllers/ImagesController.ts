@@ -2,25 +2,26 @@ import {IController} from "@/controllers/IController";
 import {Image} from "@/models/Image";
 
 class ImagesController implements IController<Image> {
-    Delete(id: number): Image {
-        return undefined;
+    delete(id: number): Promise<boolean> {
+        return Promise.resolve(false);
     }
 
-    Insert(object: Image): Image {
-        return undefined;
+    getAll(): Promise<Image[]> {
+        return Promise.resolve([]);
     }
 
-    Update(id: number, object: Image): Image {
-        return undefined;
+    getById(id: number): Promise<Image> {
+        return Promise.resolve(undefined);
     }
 
-    getAll(): Image[] {
-        return [];
+    insert(object: Image): Promise<Image> {
+        return Promise.resolve(undefined);
     }
 
-    getById(id: number): Image[] {
-        return [];
+    update(id: number, object: Image): Promise<Image> {
+        return Promise.resolve(undefined);
     }
+
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export

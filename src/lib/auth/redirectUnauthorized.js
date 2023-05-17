@@ -3,11 +3,11 @@ import {sessionOptions} from "./session";
 
 const redirectUnauthorized = withIronSessionSsr(
     async function ({req, res}) {
-        const user = req.session.user;
+        const user = req.session?.user;
         if (!user || !user?.isLogged) {
             return {
                 redirect: {
-                    destination: '/login',
+                    destination: '/signin',
                     permanent: false
                 }
             }

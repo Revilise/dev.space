@@ -1,31 +1,28 @@
-export class User {
-    constructor() {
-        const temp: User = this;
-        Object.defineProperty(temp, "id", {
-            enumerable: false
-        })
+import {Entity} from "@/models/Entity";
+
+export class User extends Entity {
+    constructor(props) {
+        super();
+
+        if (props)
+        for (let key in this) {
+            this[key] = props[key];
+        }
     }
 
-    id: number = null
-    firstname: string = null
-    secondname: string = null
-    lastname: string = null
-    nickname: string = null
-    email: string = null
-    password: string = null
+    firstname: string = ""
+    secondname: string = ""
+    lastname: string = ""
+    nickname: string = ""
+    email: string = ""
+    password: string = ""
     imageid: number = 1
 
-    static Parse(object: any): User {
-        const user = new User();
+    static Parse = (object) => super.Parse(object, User);
 
-        for (let prop in user) {
-            user[prop] = object[prop];
-        }
-
-        return user;
+    toObject(): object {
+        return super.toObject();
     }
 
-    toObject():object {
-        return JSON.parse(JSON.stringify(this));
-    }
+    static Create = (props) => new User(props);
 }

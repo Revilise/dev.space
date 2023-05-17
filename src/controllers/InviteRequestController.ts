@@ -2,25 +2,26 @@ import {IController} from "@/controllers/IController";
 import {InviteRequest} from "@/models/InviteRequest";
 
 class InviteRequestController implements IController<InviteRequest> {
-    Delete(id: number): InviteRequest {
-        return undefined;
+    delete(id: number): Promise<boolean> {
+        return Promise.resolve(false);
     }
 
-    Insert(object: InviteRequest): InviteRequest {
-        return undefined;
+    getAll(): Promise<InviteRequest[]> {
+        return Promise.resolve([]);
     }
 
-    Update(id: number, object: InviteRequest): InviteRequest {
-        return undefined;
+    getById(id: number): Promise<InviteRequest> {
+        return Promise.resolve(undefined);
     }
 
-    getAll(): InviteRequest[] {
-        return [];
+    insert(object: InviteRequest): Promise<InviteRequest> {
+        return Promise.resolve(undefined);
     }
 
-    getById(id: number): InviteRequest[] {
-        return [];
+    update(id: number, object: InviteRequest): Promise<InviteRequest> {
+        return Promise.resolve(undefined);
     }
+
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export

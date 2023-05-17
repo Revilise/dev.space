@@ -3,10 +3,10 @@ import React, {useEffect} from "react";
 import Router from "next/router";
 
 export default function useUser ({
-                                     redirectTo = '',
-                                     redirectIfFound = false
-                                 } = {}) {
-    const { data: user, mutate: mutateUser } = useSWR(`/api/user`);
+       redirectTo = '',
+       redirectIfFound = false
+} = {}) {
+    const {data: user, mutate: mutateUser} = useSWR(`/api/user`);
 
     useEffect(() => {
         if (!redirectTo || !user) return;
@@ -19,5 +19,5 @@ export default function useUser ({
         }
     }, [user, redirectIfFound, redirectTo])
 
-    return { user, mutateUser };
+    return {user, mutateUser};
 }

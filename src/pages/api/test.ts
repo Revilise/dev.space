@@ -8,13 +8,10 @@ export default async function TestAPIRoute(
     res: NextApiResponse
 ) {
 
-    const user = new User();
-    user.password = "";
-    user.nickname = "trash";
+    const user = User.Create({email: "emaul", firstname: "firstname"});
+    console.log(user)
 
-    await axios
-            .post("http://localhost:3000/api/auth/signup/", {user: user.toObject()})
-            .then(res => console.log(res.data))
+    const data = await UserController.getAll();
 
-    res.json(null);
+    res.json(data);
 }

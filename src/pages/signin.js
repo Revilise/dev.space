@@ -12,8 +12,8 @@ export default function SigninPage() {
         redirectIfFound: true
     })
 
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     async function SendLoginRequest() {
         mutateUser(
@@ -30,7 +30,7 @@ export default function SigninPage() {
         <Layout>
             <Form>
                 <Input value={email} onChange={e => setEmail(e.target.value)} />
-                <Input value={password} onChange={setPassword(e.target.value)} />
+                <Input value={password} onChange={e => setPassword(e.target.value)} />
                 <Button onClick={SendLoginRequest}>Войти</Button>
             </Form>
         </Layout>

@@ -18,7 +18,6 @@ class UserController implements IController<User> {
 
         const text = `INSERT INTO users (${props}) VALUES(${values.map((el, idx) => `$${idx+1}`)}) RETURNING *`;
 
-        console.log(text);
         const config: QueryConfig = {text, values};
 
         return pool.query(config).then(data => User.Parse(data.rows[0]));
@@ -33,6 +32,7 @@ class UserController implements IController<User> {
         const text = `UPDATE users SET ${props} WHERE id = ${id}`;
         const values = keys.map(key => object[key]);
 
+        console.log(text)
         const config: QueryConfig = {text, values};
         return pool.query(config).then(data => object);
     }
@@ -42,7 +42,9 @@ class UserController implements IController<User> {
     }
 
     getById(id: number): Promise<User> {
-        return pool.query({text: "SELECT * FROM users WHERE id = $1", values: [id]}).then(data => User.Parse(data.rows[0]));
+        return pool.query({text: "SELECT * FROM users WHERE id = $1", values: [id]}).then(data => {
+            return data.rows.length ? User.Parse(data.rows[0]) : null;
+        });
     }
 
     getByAuthData(email: string, password: string): Promise<User> {
@@ -52,7 +54,7 @@ class UserController implements IController<User> {
         return pool
                 .query({text, values})
                 .then(data => data.rows[0])
-                .then(row => this.getById(row.id))
+                .then(row => row ? this.getById(row.id) : null)
     }
 }
 

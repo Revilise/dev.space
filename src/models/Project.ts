@@ -1,11 +1,14 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, Relation} from "typeorm";
-import {User} from './User'
-import {InviteRequest} from "@/models/InviteRequest";
-import {ProjectMembership} from "@/models/ProjectMembership";
-import {ProjectFile} from "@/models/ProjectFile";
+import {Entity} from "@/models/Entity";
 
-@Entity("Projects")
-export class Project {
+export class Project extends Entity {
+    constructor(props) {
+        super();
+
+        if (props)
+        for (let key in this) {
+            this[key] = props[key];
+        }
+    }
     id: number
     name: string
     description: string
@@ -16,4 +19,8 @@ export class Project {
     report: string
     stepNumber: number
     adminId: number
+
+    static Parse = (object) => super.Parse(object, Project);
+
+    static Create = (props) => new Project(props);
 }

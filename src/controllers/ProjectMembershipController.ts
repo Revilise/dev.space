@@ -2,25 +2,26 @@ import {IController} from "@/controllers/IController";
 import {ProjectMembership} from "@/models/ProjectMembership";
 
 class ProjectMembershipController implements IController<ProjectMembership> {
-    Delete(id: number): ProjectMembership {
-        return undefined;
+    delete(id: number): Promise<boolean> {
+        return Promise.resolve(false);
     }
 
-    Insert(object: ProjectMembership): ProjectMembership {
-        return undefined;
+    getAll(): Promise<ProjectMembership[]> {
+        return Promise.resolve([]);
     }
 
-    Update(id: number, object: ProjectMembership): ProjectMembership {
-        return undefined;
+    getById(id: number): Promise<ProjectMembership> {
+        return Promise.resolve(undefined);
     }
 
-    getAll(): ProjectMembership[] {
-        return [];
+    insert(object: ProjectMembership): Promise<ProjectMembership> {
+        return Promise.resolve(undefined);
     }
 
-    getById(id: number): ProjectMembership[] {
-        return [];
+    update(id: number, object: ProjectMembership): Promise<ProjectMembership> {
+        return Promise.resolve(undefined);
     }
+
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
