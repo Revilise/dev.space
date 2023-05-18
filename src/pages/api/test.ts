@@ -9,7 +9,6 @@ export default async function TestAPIRoute(
 ) {
 
     const user = User.Create({email: "emaul", firstname: "firstname"});
-    console.log(user)
 
     const data = await UserController.getAll();
 

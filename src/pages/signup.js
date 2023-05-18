@@ -9,10 +9,11 @@ import {mutate} from "swr";
 import useUser from "../lib/hooks/useUser";
 
 export default function SignupPage() {
-    const {mutateUser} = useUser({
-        redirectTo: '/',
+    const { mutateUser } = useUser({
+        redirectTo: "/about",
         redirectIfFound: true
     })
+
     const [user, setUser] = useState(new User());
 
     function OnFieldChange(e) {
@@ -21,12 +22,10 @@ export default function SignupPage() {
     }
 
     async function SendRegRequest() {
-
-        console.log(user?.toObject());
         mutateUser(
             await (async function() {
                 try {
-                    const res = await axios.post("http://localhost:3000/api/auth/logup", {user: user.toObject()})
+                    const res = await axios.post("http://localhost:3000/api/auth/signup", {user: user.toObject()})
                     if (res.isLogged) return res;
                 } catch {}
             })()
@@ -36,9 +35,9 @@ export default function SignupPage() {
     return (
         <Layout>
             <Form>
-                <Input value={user.email} name={"email"} onChange={OnFieldChange} />
-                <Input value={user.firstname} name={"firstname"} onChange={OnFieldChange} />
-                <Input value={user.password} name={"password"} onChange={OnFieldChange} />
+                {
+                    Object.keys(user).map((field, idx) => !field.includes("id") ? <Input required={true} key={idx} label={field} name={field} value={user[field]} onChange={OnFieldChange} /> : '')
+                }
                 <Button onClick={SendRegRequest}>Отправить</Button>
             </Form>
         </Layout>

@@ -1,14 +1,4 @@
-@import 'src/styles/mixins/flex.mixin.scss';
-.container {
-  @include flex-column;
-  .input {
-    background: transparent;
-    border: 1px solid rgb(var(--foreground-rgb));
-    border-radius: 8px;
-    padding: 16px 22px;
-    font-size: 18px;
-    &::placeholder {
-      color: rgb(var(--foreground-sub-rgb));
-    }
-  }
+.input {
+  display: flex;
+  flex-direction: column;
 }

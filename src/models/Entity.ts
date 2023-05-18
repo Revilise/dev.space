@@ -1,10 +1,10 @@
 export class Entity {
     constructor() {
-        // const temp: Entity = this;
-        //
-        // Object.defineProperty(temp, "id", {
-        //     enumerable: false
-        // })
+        const temp: Entity = this;
+
+        Object.defineProperty(temp, "id", {
+            enumerable: false
+        })
     }
 
     id: number = null;

@@ -32,7 +32,6 @@ class UserController implements IController<User> {
         const text = `UPDATE users SET ${props} WHERE id = ${id}`;
         const values = keys.map(key => object[key]);
 
-        console.log(text)
         const config: QueryConfig = {text, values};
         return pool.query(config).then(data => object);
     }

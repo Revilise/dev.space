@@ -6,9 +6,8 @@ import UserController from "@/controllers/UserController";
 import {User} from "@/models/User";
 
 
-function SignUpAPIRoute(req: NextApiRequest, res: NextApiResponse) {
+async function SignUpAPIRoute(req: NextApiRequest, res: NextApiResponse) {
     const {user} = req.body;
-
     const temp = User.Parse(user);
 
     UserController
@@ -18,7 +17,7 @@ function SignUpAPIRoute(req: NextApiRequest, res: NextApiResponse) {
 
             req.session.user = {...insertedUser, isLogged: true};
             await req.session.save();
-            res.json(req.session.user);
+            res.status(200).json(req.session.user);
         })
         .catch(err => console.log(err));
 }

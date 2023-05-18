@@ -8,7 +8,7 @@ import useUser from "../lib/hooks/useUser";
 
 export default function SigninPage() {
     const {mutateUser} = useUser({
-        redirectTo: '/',
+        redirectTo: "/",
         redirectIfFound: true
     })
 
@@ -21,6 +21,7 @@ export default function SigninPage() {
                 const res = await axios
                                     .post("http://localhost:3000/api/auth/signin", {email, password})
                                     .then(res => res.data);
+
                 if (res.isLogged) return res;
             })()
         )
@@ -29,8 +30,8 @@ export default function SigninPage() {
     return (
         <Layout>
             <Form>
-                <Input value={email} onChange={e => setEmail(e.target.value)} />
-                <Input value={password} onChange={e => setPassword(e.target.value)} />
+                <Input key={1} label={"email"} value={email} onChange={e => setEmail(e.target.value)} />
+                <Input key={2} label={"password"} value={password} onChange={e => setPassword(e.target.value)} />
                 <Button onClick={SendLoginRequest}>Войти</Button>
             </Form>
         </Layout>

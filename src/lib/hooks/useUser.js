@@ -1,12 +1,13 @@
 import useSWR from 'swr';
 import React, {useEffect} from "react";
 import Router from "next/router";
+import {fetcher} from "@/lib/fetcher";
 
 export default function useUser ({
-       redirectTo = '',
+       redirectTo = '/',
        redirectIfFound = false
 } = {}) {
-    const {data: user, mutate: mutateUser} = useSWR(`/api/user`);
+    const {data: user, mutate: mutateUser} = useSWR(`/api/user`, fetcher);
 
     useEffect(() => {
         if (!redirectTo || !user) return;
@@ -15,7 +16,7 @@ export default function useUser ({
             (redirectTo && !redirectIfFound && !user?.isLogged) ||
             (redirectIfFound && user?.isLogged)) {
 
-            Router.push(redirectTo)
+            Router.replace(redirectTo);
         }
     }, [user, redirectIfFound, redirectTo])
 

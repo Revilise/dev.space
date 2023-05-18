@@ -9,10 +9,11 @@ function SignInAPIRoute(req: NextApiRequest, res: NextApiResponse) {
     UserController
         .getByAuthData(email, password)
         .then(async (user) => {
-            if (!user.id) return res.json({ok: false});
+            if (!user.email) return res.json({ok: false});
 
             req.session.user = {...user, isLogged: true};
             await req.session.save();
+
             res.json(req.session.user);
         })
         .catch(err => console.log(err))
