@@ -1,6 +1,8 @@
-import Head from "next/head";
+import Head from "next/head"
+import css from './layout.module.scss'
+import Sidebar from "@/components/sidebar/Sidebar";
 
-export default function Layout({children, title = "", metaContent = ""}) {
+function Layout({children, title="", metaContent=""}) {
     return (
         <>
             <Head>
@@ -9,9 +11,21 @@ export default function Layout({children, title = "", metaContent = ""}) {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div>
-                {children}
+            <div className={css.layout}>
+                { children }
             </div>
         </>
     )
 }
+
+// eslint-disable-next-line react/display-name
+Layout.Semantic = ({title="", metaContent="", children}) => {
+    return (
+        <Layout title={title} metaContent={metaContent}>
+            <Sidebar />
+            {children}
+        </Layout>
+    )
+}
+
+export default Layout;

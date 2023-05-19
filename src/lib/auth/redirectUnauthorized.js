@@ -1,5 +1,6 @@
 import {withIronSessionSsr} from "iron-session/next";
 import {sessionOptions} from "./session";
+import axios from "axios";
 
 const redirectUnauthorized = withIronSessionSsr(
     async function ({req, res}) {
@@ -12,6 +13,7 @@ const redirectUnauthorized = withIronSessionSsr(
                 }
             }
         }
+
         return {
             props: {
                 user

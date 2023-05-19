@@ -20,8 +20,8 @@ export default function SigninPage() {
             await (async function() {
                 const res = await axios
                                     .post("http://localhost:3000/api/auth/signin", {email, password})
-                                    .then(res => res.data);
-
+                                    .then(res => res.data)
+                                    .catch(err => console.error(err))
                 if (res.isLogged) return res;
             })()
         )

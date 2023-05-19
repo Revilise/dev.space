@@ -24,10 +24,8 @@ export default function SignupPage() {
     async function SendRegRequest() {
         mutateUser(
             await (async function() {
-                try {
-                    const res = await axios.post("http://localhost:3000/api/auth/signup", {user: user.toObject()})
-                    if (res.isLogged) return res;
-                } catch {}
+                    const res = await axios.post("http://localhost:3000/api/auth/signup", {user: user.toObject()}).catch(err => console.error(err))
+                    if (res?.isLogged) return res;
             })()
         )
     }

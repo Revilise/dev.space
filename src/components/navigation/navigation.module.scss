@@ -1,0 +1,34 @@
+@mixin flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation {
+  @include flex;
+
+  > &__link {
+    padding: 8px;
+  }
+
+  &__link.active {
+    //todo change
+    color: red;
+  }
+
+  &__section {
+    @include flex;
+    margin-bottom: 48px;
+    & > .navigation__link {
+      padding: 8px 8px 8px 24px;
+    }
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 1.5em;
+    > .navigation__link_active {
+      //todo change
+      border: 1px solid white;
+    }
+  }
+}

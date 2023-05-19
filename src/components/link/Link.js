@@ -1,6 +1,7 @@
-import css from './link.module.scss';
-import * as NextLink from "next/link";
+import A from "next/link";
 
-export default function Link({children}) {
-    return <NextLink className={css.link}>{children}</NextLink>
+export default function Link({children, href}) {
+    return (
+        <A href={href}>{children}</A>
+    )
 }
