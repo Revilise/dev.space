@@ -1,13 +1,18 @@
 import {useRouter} from "next/router";
 import ProjectLayout from "../../../components/project/ProjectLayout";
-import useProjectStep from "../../../lib/hooks/useProjectStep";
+import useSWR from "swr";
 
 export default function ProjectPage() {
-    const router = useRouter();
+    const {query} = useRouter();
 
+    const {data: project} = useSWR(`http://localhost:3000/api/project/${query.id}`)
+
+    console.log(project)
     return (
-        <ProjectLayout projectId={router.query.id}>
-            <h1>sdome</h1>
+        <ProjectLayout projectId={query.id}>
+            <h2>{project?.name}</h2>
+            <p>{project?.description}</p>
+            <p>{project?.generalactivity}</p>
         </ProjectLayout>
     )
 }

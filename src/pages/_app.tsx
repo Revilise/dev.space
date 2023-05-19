@@ -1,17 +1,17 @@
 import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-import {useEffect} from "react";
-import {Provider, useDispatch} from "react-redux";
+import {Provider} from "react-redux";
 import store from '@/app/store'
-
-function InnerApp({Component, pageProps}) {
-    return <Component {...pageProps}/>
-}
+import Popup from '@/features/popup/Popup';
+import { SWRConfig } from "swr";
+import {fetcher} from "@/lib/fetcher";
 
 export default function App({Component, pageProps}) {
     return (
-        <Provider store={store}>
-            <InnerApp Component={Component} pageProps={pageProps}/>
-        </Provider>
+        <SWRConfig value={{fetcher}}>
+            <Provider store={store}>
+                <Popup />
+                <Component {...pageProps}/>
+            </Provider>
+        </SWRConfig>
     )
 }

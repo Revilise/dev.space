@@ -8,11 +8,16 @@ class ProjectsController implements IController<Project> {
     }
 
     getAll(): Promise<Project[]> {
-        return Promise.resolve([]);
+        return pool
+                    .query("SELECT * FROM projects")
+                    .then(data => data.rows.map(el => Project.Parse(el)))
     }
 
     getById(id: number): Promise<Project> {
-        return Promise.resolve(undefined);
+        const text = "SELECT * FROM projects WHERE id = $1";
+        return pool
+                    .query({text, values: [id]})
+                    .then(data => Project.Parse(data.rows[0]))
     }
 
     insert(object: Project): Promise<Project> {
@@ -29,9 +34,9 @@ class ProjectsController implements IController<Project> {
             ON pr.id = pm.projectid
             WHERE pm.userId = $1 AND pm.projectId = pr.id`;
 
-        return pool.query({text, values: [id]}).then(data => data.rows.map(el => {
-            return Project.Parse(el)
-        }));
+        return pool
+                    .query({text, values: [id]})
+                    .then(data => data.rows.map(el => Project.Parse(el)));
     }
 }
 

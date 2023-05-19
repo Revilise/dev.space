@@ -1,8 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
+import PopupReducer from "@/features/popup/PopupSlice";
 
 export function makeStore() {
     return configureStore({
-        reducer: {}
+        reducer: {
+            popup: PopupReducer
+        }
     })
 }
 

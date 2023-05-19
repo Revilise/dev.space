@@ -36,14 +36,6 @@ export default function Sidebar() {
                     <Navigation.Title>Проекты</Navigation.Title>
                     {navProjects?.map((el, i) => <Navigation.Link key={i} isActive={router.asPath == el.href} href={el.href}>{el.name}</Navigation.Link>)}
                 </Navigation.Section>
-
-                <Navigation.Title>
-                    <Navigation.Link href={"/about"}>О нас</Navigation.Link>
-                </Navigation.Title>
-
-                <Navigation.Title>
-                    <Navigation.Link href={"/about"}>О вас</Navigation.Link>
-                </Navigation.Title>
             </Navigation>
 
             <button onClick={logout}>logout</button>

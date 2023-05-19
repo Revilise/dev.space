@@ -16,6 +16,8 @@ export default function FileStorePage() {
         //setFiles
     }
 
+    console.log(router)
+
     return (
         <ProjectLayout projectId={router.query.id}>
             <Search onSearch={SearchHandle} />

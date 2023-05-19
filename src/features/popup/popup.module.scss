@@ -1,0 +1,32 @@
+@import 'src/styles/mixins/flex.mixin.scss';
+
+.before {
+  position: absolute;
+  width: 100vw;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.45);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  z-index: 1000;
+}
+
+.container {
+  //@include container;
+  //@include vertical-flex;
+  @include flex-column;
+  padding: 24px;
+  gap: 8px;
+  grid-column-start: 3;
+  grid-column-end: 7;
+  align-self: center;
+  height: fit-content;
+}
+
+.buttons {
+  @include flex;
+}
+
+.header {
+  @include flex;
+  justify-content: space-between;
+}
