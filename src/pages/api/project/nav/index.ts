@@ -8,7 +8,7 @@ async function GetNavProjects(req: NextApiRequest, res: NextApiResponse) {
 
     const result = await ProjectsController.getAllByUserId(userid)
 
-    res.json(result.map(el => ({id: el.id, name: el.name, href: `/project/${el.id}`})))
+    res.json(result.map(el => ({id: el.id, name: el.name, href: `/projects/${el.id}`})))
 }
 
 export default withIronSessionApiRoute(GetNavProjects, sessionOptions);

@@ -1,11 +1,8 @@
-@mixin flex {
-  display: flex;
-  flex-direction: column;
-}
+@import 'src/styles/mixins/flex.mixin.scss';
 
 .navigation {
-  @include flex;
-
+  @include flex-column;
+  gap: 8px;
   > &__link {
     padding: 8px;
   }
@@ -16,7 +13,7 @@
   }
 
   &__section {
-    @include flex;
+    @include flex-column;
     margin-bottom: 48px;
     & > .navigation__link {
       padding: 8px 8px 8px 24px;

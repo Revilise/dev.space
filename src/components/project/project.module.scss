@@ -1,0 +1,6 @@
+@import "src/styles/mixins/flex.mixin.scss";
+
+.projectLayout {
+  @include flex-column;
+  height: 100%;
+}

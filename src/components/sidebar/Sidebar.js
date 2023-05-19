@@ -10,7 +10,7 @@ export default function Sidebar() {
         redirectTo: '/signin'
     });
 
-    const {pathname} = useRouter();
+    const router = useRouter();
 
     const {navProjects} = useNavProjects();
 
@@ -28,9 +28,13 @@ export default function Sidebar() {
             <h1>logo</h1>
 
             <Navigation>
+                <Navigation.Title>
+                    <Navigation.Link href={"/"}>Главная</Navigation.Link>
+                </Navigation.Title>
+
                 <Navigation.Section>
                     <Navigation.Title>Проекты</Navigation.Title>
-                    {navProjects?.map((el, i) => <Navigation.Link key={i} isActive={pathname == el.href} href={el.href}>{el.name}</Navigation.Link>)}
+                    {navProjects?.map((el, i) => <Navigation.Link key={i} isActive={router.asPath == el.href} href={el.href}>{el.name}</Navigation.Link>)}
                 </Navigation.Section>
 
                 <Navigation.Title>

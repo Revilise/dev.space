@@ -1,4 +1,5 @@
+@import 'src/styles/mixins/flex.mixin.scss';
+
 .input {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
 }

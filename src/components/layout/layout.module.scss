@@ -1,3 +1,9 @@
+@import 'src/styles/mixins/flex.mixin.scss';
+
 .layout {
-  display: flex;
+  @include flex;
+  width: 100%;
+  &-content {
+    width: 100%;
+  }
 }

@@ -23,7 +23,9 @@ Layout.Semantic = ({title="", metaContent="", children}) => {
     return (
         <Layout title={title} metaContent={metaContent}>
             <Sidebar />
-            {children}
+            <div className={css["layout-content"]}>
+                {children}
+            </div>
         </Layout>
     )
 }

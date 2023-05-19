@@ -1,8 +1,11 @@
+@import 'src/styles/mixins/flex.mixin.scss';
+
 .sidebar {
   padding: 24px 32px;
-  width: 200px;
-  display: flex;
-  flex-direction: column;
+  max-width: 160px;
+  min-width: 160px;
+  @include flex-column;
+  box-sizing: content-box;
   gap: 16px;
   min-height: 100vh;
 
