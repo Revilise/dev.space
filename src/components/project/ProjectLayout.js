@@ -15,6 +15,7 @@ export default function ProjectLayout({children, projectId}) {
                 <Header>
                     <Link href={`${url}/step-1`}>Этап 1</Link>
                     <Link href={`${url}/members`}>Участники</Link>
+                    <Link href={`${url}/file-store`}>Хранилище файлов</Link>
                 </Header>
                 {children}
             </div>

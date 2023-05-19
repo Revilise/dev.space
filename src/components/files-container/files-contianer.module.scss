@@ -1,0 +1,29 @@
+@import "src/styles/mixins/flex.mixin.scss";
+
+.files {
+  @include flex-row;
+  flex-wrap: wrap;
+  column-gap: 24px;
+  row-gap: 16px;
+  &-item {
+    width: calc((100% - 24px  * 4) / 5);
+    background: pink;
+    padding: 16px;
+    &__header {
+      @include flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .files-item {
+    width: calc((100% - 24px  * 2) / 3);
+  }
+}
+
+@media (max-width: 800px) {
+  .files-item {
+    width: 100%;
+  }
+}

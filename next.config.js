@@ -3,7 +3,16 @@ const nextConfig = {
   reactStrictMode: false,
   experiments: {
     topLevelAwait: true
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/projects/null/:path*',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
 }
 
 module.exports = nextConfig
