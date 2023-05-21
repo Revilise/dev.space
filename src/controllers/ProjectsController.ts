@@ -28,7 +28,7 @@ class ProjectsController implements IController<Project> {
         const props = keys.join(", ");
         const values = keys.map(key => object[key]);
 
-        //todo написать sql-функцию
+        //todo написать sql-функцию или триггер
         const text = `
             INSERT INTO projects (${props}) 
             VALUES(${values.map((el, idx) => `$${idx+1}`)}) 
@@ -37,7 +37,9 @@ class ProjectsController implements IController<Project> {
 
         const config: QueryConfig = {text, values};
 
-        return pool.query(config).then(data => User.Parse(data.rows[0]));
+        return pool
+                .query(config)
+                .then(data => User.Parse(data.rows[0]));
     }
 
     update(id: number, object: Project): Promise<Project> {
