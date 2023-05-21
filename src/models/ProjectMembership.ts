@@ -1,20 +1,22 @@
-import {Project} from "@/models/Project";
-import {User} from "@/models/User";
 import {Entity} from "@/models/Entity";
 
 export class ProjectMembership extends Entity {
     constructor(props) {
         super();
+        if (props)
+            for (let key in this) {
+                this[key] = props[key];
+            }
     }
 
-    id: number
-    Project: Project
-    User: User
+    projectid: number = null
+    userid: number = null
+    userStatusid: number = null
 
     static Parse = (object) => super.Parse(object, ProjectMembership);
     static Create = (props) => new ProjectMembership(props);
 
     toObject(): object {
-        return {id: this.id, projectid: this.Project.id, userid: this.User.id }
+        return super.toObject();
     }
 }

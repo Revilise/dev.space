@@ -4,7 +4,9 @@ import {NextApiRequest, NextApiResponse} from "next";
 import ProjectsController from "@/controllers/ProjectsController";
 
 async function GetAllProjects(req: NextApiRequest, res: NextApiResponse) {
-    const result = await ProjectsController.getAll();
+    const {id} = req.session.user;
+
+    const result = await ProjectsController.getAllByUserId(id);
 
     res.json(result);
 }

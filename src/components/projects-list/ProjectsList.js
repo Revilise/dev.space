@@ -1,35 +1,39 @@
 import css from './projects-list.module.scss'
 import {useDispatch} from "react-redux";
 import {showPopup} from "@/features/popup/PopupSlice";
+import Button from "@/components/button/Button";
 
-function Item({project, onClick}) {
+function Item({project}) {
 
-    const handler = () => onClick({
-        header: project.name,
-        text: project.description
-    })
+
+    const dispatch = useDispatch();
+
+    function openDetails() {
+        const options = {
+            type: 'ProjectInfo',
+            payload: {project}
+        }
+
+        dispatch(showPopup({
+            header: project.name,
+            text: project.description,
+            options
+        }))
+    }
 
     return (
         <div className={css["list-item"]}>
-            <h3>{project.title}</h3>
+            <h3>{project.name}</h3>
             <p>{project.description}</p>
-            <button onClick={handler}>подбробнее</button>
+            <Button onClick={openDetails} label={"подбробнее"} />
         </div>
     )
 }
 
 export default function ProjectsList({items = []}) {
-    const dispatch = useDispatch();
-
-    function openDetails({header, text}) {
-        dispatch(showPopup({
-            header, text
-        }))
-    }
-
     return (
         <div className={css.list}>
-            {items.map((el, idx) => <Item onClick={openDetails} key={idx} project={el} />)}
+            {items.map((el, idx) => <Item key={idx} project={el} />)}
         </div>
     )
 }

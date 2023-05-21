@@ -1,4 +1,8 @@
+@import 'src/styles/mixins/flex.mixin.scss';
+
 .list {
+  @include flex-column;
+  gap: 8px;
   &-item {
     background: pink;
   }

@@ -1,6 +1,15 @@
+@import 'src/styles/mixins/flex.mixin.scss';
+
 .button {
+  @include flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
-  background: transparent;
-  border: none;
-  font-size: 18px;
+  padding: 4px;
+  &__label {
+    padding: 4px;
+  }
+  &__icon {
+
+  }
 }

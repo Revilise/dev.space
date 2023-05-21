@@ -11,8 +11,7 @@
 }
 
 .container {
-  //@include container;
-  //@include vertical-flex;
+  background: coral;
   @include flex-column;
   padding: 24px;
   gap: 8px;

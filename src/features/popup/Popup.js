@@ -1,13 +1,13 @@
-import cl from './popup.module.scss';
+import css from './popup.module.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {closePopup, selectContent, selectIsPopupVisible, selectOptions, setResult} from "./PopupSlice";
 import {useEffect} from "react";
-import Button from "@/components/button/Button";
+import Icons from "@/components/svg-icons/icons";
+import {contentTypes} from "@/features/popup/content-types/contentTypes";
 
-export default function Popup() {
+function Popup() {
     const dispatch = useDispatch();
-    const { text, header } = useSelector(selectContent);
-    const { ok, cancel, fn } = useSelector(selectOptions);
+    const { type, fn, payload } = useSelector(selectOptions);
     const isVisible = useSelector(selectIsPopupVisible);
 
     useEffect(() => {
@@ -20,32 +20,37 @@ export default function Popup() {
         return () => window.removeEventListener('keydown', KeyDown);
     }, [])
 
-    function close(result) {
-        dispatch(setResult(result))
-        if (result && fn) fn();
+    function close() {
         dispatch(closePopup())
     }
 
+    const Component = contentTypes[type];
+
     if (isVisible)
     return (
-        <div className={cl.before}>
-            <div className={cl.container}>
-                <header className={cl.header}>
-                    <h3>{header}</h3>
-                    <div onClick={close}>
-                        close
-                    </div>
-                </header>
-                <p>{text}</p>
-                { ok || cancel ? (
-                    <div className={cl.buttons}>
-                        { ok ? <Button onClick={() => close(true)}>ok</Button> : <></> }
-                        { cancel ? <Button onClick={() => close(false)}>cancel</Button> : <></> }
-                    </div>
-                ) : <></>}
+        <div className={css.before}>
+            <div className={css.container}>
+                { <Component {...payload} /> }
             </div>
         </div>
     )
 
     return <></>
 }
+
+// eslint-disable-next-line react/display-name
+Popup.Header = ({title}) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const dispatch = useDispatch();
+
+    return (
+        <header className={css.header}>
+            <h3>{title}</h3>
+            <div onClick={() => dispatch(closePopup())}>
+                <Icons.Close/>
+            </div>
+        </header>
+    )
+}
+
+export default Popup;

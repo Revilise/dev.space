@@ -4,6 +4,8 @@ import axios from "axios";
 import Navigation from "@/components/navigation/Navigation";
 import {useRouter} from "next/router";
 import useNavProjects from "@/lib/hooks/useNavProjects";
+import Icons from "@/components/svg-icons/icons";
+import Button from "@/components/button/Button";
 
 export default function Sidebar() {
     const {mutateUser} = useUser({
@@ -38,7 +40,12 @@ export default function Sidebar() {
                 </Navigation.Section>
             </Navigation>
 
-            <button onClick={logout}>logout</button>
+            <Button onClick={logout}>
+                <Button.Label>Выйти</Button.Label>
+                <Button.Icon>
+                    <Icons.LogOut />
+                </Button.Icon>
+            </Button>
         </aside>
     )
 }

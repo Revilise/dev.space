@@ -1,0 +1,30 @@
+@mixin styleIcons($class) {
+  cursor: pointer;
+  display: flex;
+  path {
+    transition: .2s;
+    stroke: rgb(var(--default-icon));
+  }
+  &__active, &:hover {
+    display: flex;
+    path {
+      stroke: rgb(var(--#{$class}));
+    }
+  }
+}
+
+.default-icon {
+  @include styleIcons('default-icon')
+}
+//.green {
+//  @include styleIcons('green-icon')
+//}
+//.red {
+//  @include styleIcons('red-icon')
+//}
+//.alfa-white {
+//  @include styleIcons('default-icon');
+//  path {
+//    stroke: var(--alfa-white);
+//  }
+//}

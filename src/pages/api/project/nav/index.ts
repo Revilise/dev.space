@@ -6,7 +6,7 @@ import ProjectsController from "@/controllers/ProjectsController";
 async function GetNavProjects(req: NextApiRequest, res: NextApiResponse) {
     const userid = req.session.user?.id;
 
-    const result = await ProjectsController.getAllByUserId(userid)
+    const result = await ProjectsController.getAllByUserId(userid, 2)
 
     res.json(result.map(el => ({id: el.id, name: el.name, href: `/projects/${el.id}`})))
 }
