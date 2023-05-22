@@ -11,6 +11,11 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/projects/undefined/:path*',
+        destination: '/',
+        permanent: true,
+      }
     ];
   },
 }

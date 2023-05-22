@@ -3,6 +3,7 @@ import Input from "../../../components/input/Input";
 import {useRouter} from "next/router";
 import Button from "../../../components/button/Button";
 import useProjectStep from "../../../lib/hooks/useProjectStep";
+import {useEffect} from "react";
 
 export default function Step1Page() {
     const router = useRouter();

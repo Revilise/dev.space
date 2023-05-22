@@ -46,7 +46,7 @@ class UserController implements IController<User> {
         });
     }
 
-    getByAuthData(email: string, password: string): Promise<User> {
+    getByAuthData(email: string, password: string): Promise<User | null> {
         const text = "SELECT id FROM users WHERE email = $1 AND password = MD5($2)";
         const values = [email, password];
 
