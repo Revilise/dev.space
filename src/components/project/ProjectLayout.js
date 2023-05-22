@@ -9,7 +9,7 @@ import axios from "axios";
 import Router from "next/router";
 
 export default function ProjectLayout({children, projectId}) {
-    const [url] = useState(`/projects/${projectId}`)
+    const url = `/projects/${projectId}`;
 
     const Visibility = useState(false);
     const [isVisible, setIsVisible] = Visibility;

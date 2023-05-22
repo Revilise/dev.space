@@ -2,14 +2,14 @@ import {useEffect, useState} from "react";
 import Router from "next/router";
 
 export default function useProjectStep({
-        projectId = null,
+        projectid = null,
         initStep = null
 }) {
     const [step, setStep] = useState(initStep ?? 1);
 
     useEffect(() => {
-            Router.replace(`/projects/${projectId}/step-${step}`);
-    }, [step, projectId])
+            Router.replace(`/projects/${projectid}/step-${step}`);
+    }, [step, projectid])
 
     function NextStep() {
         if (step < 5)

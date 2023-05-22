@@ -2,6 +2,9 @@ import css from './step.module.scss'
 import ProjectLayout from "../project/ProjectLayout";
 
 function StepLayout({children, projectId}) {
+
+
+
     return (
         <ProjectLayout projectId={projectId}>
             <div className={css.step}>

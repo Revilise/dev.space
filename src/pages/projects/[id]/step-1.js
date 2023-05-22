@@ -1,19 +1,24 @@
 import StepLayout from "../../../components/step/StepLayout";
 import Input from "../../../components/input/Input";
-import {useRouter} from "next/router";
 import Button from "../../../components/button/Button";
 import useProjectStep from "../../../lib/hooks/useProjectStep";
+import useLastViewedProjectId from "../../../lib/hooks/useLastViewedProjectId";
 import {useEffect} from "react";
 
 export default function Step1Page() {
-    const router = useRouter();
+
+    const { lastProjectId } = useLastViewedProjectId();
 
     const { NextStep } = useProjectStep({
-        projectId: router.query.id
+        projectId: lastProjectId
     });
 
+    useEffect(() => {
+
+    }, [lastProjectId])
+
     return (
-        <StepLayout projectId={router.query.id}>
+        <StepLayout projectId={lastProjectId}>
             <StepLayout.Main>
                 <Input/>
                 <Button onClick={NextStep}>Следующий этап</Button>
@@ -22,3 +27,5 @@ export default function Step1Page() {
         </StepLayout>
     )
 }
+
+// todo: make ssr;
