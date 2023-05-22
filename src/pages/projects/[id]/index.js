@@ -7,7 +7,6 @@ export default function ProjectPage() {
 
     const {data: project} = useSWR(`http://localhost:3000/api/project/${query.id}`)
 
-    console.log(project)
     return (
         <ProjectLayout projectId={query.id}>
             <h2>{project?.name}</h2>

@@ -37,9 +37,7 @@ export default function useUserStatus({init_status = null, projectid }) {
             .then(() => setStatus(statuses.request))
     }
 
-    useEffect(() => {
-        console.log("updated")
-    }, [status, projectid])
+    useEffect(() => {}, [status, projectid])
 
     return { status, updateUserStatus }
 }

@@ -1,10 +1,10 @@
-import useUserStatus, {statuses} from "../../../lib/hooks/useUserStatus";
-import Button from "../../../components/button/Button";
-import css from "../popup.module.scss";
-import Popup from '../Popup';
+import PopupBuilder from "../../features/popup/PopupBuilder";
+import useUserStatus, {statuses} from "../../lib/hooks/useUserStatus";
 import {useEffect, useState} from "react";
+import css from "../../features/popup/popup.module.scss";
+import Button from "../button/Button";
 
-export default function ProjectInfo({project}) {
+const Layout = ({project}) => {
     const { status, updateUserStatus }  = useUserStatus({
         init_status: project.userstatus,
         projectid: project.id
@@ -29,7 +29,6 @@ export default function ProjectInfo({project}) {
 
     return (
         <>
-            <Popup.Header title={project.name} />
             <p>{project.description}</p>
             <div className={css.buttons}>
                 <Button onClick={updateUserStatus} label={label}></Button>
@@ -37,3 +36,7 @@ export default function ProjectInfo({project}) {
         </>
     )
 }
+
+const ProjectInfoPopup = (props) => PopupBuilder(Layout)(props);
+
+export default ProjectInfoPopup;
