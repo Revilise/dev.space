@@ -15,7 +15,7 @@ export default function ProjectLayout({children, projectId}) {
     const [isVisible, setIsVisible] = Visibility;
 
     const Result = useState(null);
-    const [value, setValue] = Result;
+    const [value] = Result;
 
     useEffect(() => {
         if (value) {
