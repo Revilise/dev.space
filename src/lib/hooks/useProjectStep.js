@@ -8,6 +8,7 @@ export default function useProjectStep({
     const [step, setStep] = useState(initStep ?? 1);
 
     useEffect(() => {
+        if (projectid)
             Router.replace(`/projects/${projectid}/step-${step}`);
     }, [step, projectid])
 

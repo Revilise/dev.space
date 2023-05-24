@@ -3,14 +3,12 @@ import ProjectsController from "@/controllers/ProjectsController";
 import {withIronSessionApiRoute} from "iron-session/next";
 import {sessionOptions} from "@/lib/auth/session";
 import * as http from "http";
-
+//
 async function Get(req: NextApiRequest, res: NextApiResponse) {
-
-    console.log(req.session.lastProjectId)
-    if (req.session.lastProjectId) {
-        res.json({
-            ...req.session.lastProjectId,
-        });
+    if (req.session.user.lastProjectId) {
+        return res.json({
+            ...req.session.user.lastProjectId,
+        })
     }
 
     res.json(null);
@@ -18,17 +16,17 @@ async function Get(req: NextApiRequest, res: NextApiResponse) {
 
 async function Post(req: NextApiRequest, res: NextApiResponse) {
     const {projectid} = req.body;
-    req.session.lastProjectId = projectid;
+    const user = req.session.user;
+    req.session.user = {...user, lastProjectId: projectid};
     await req.session.save();
-
-    console.log(req.session.lastProjectId)
-    res.json(req.session.lastProjectId);
+    res.json(req.session.user);
 }
-
+//
 async function GetLastViewedProject(req: NextApiRequest, res: NextApiResponse) {
+    let result = null;
     switch (req.method) {
-        case "GET": return Get(req, res);
-        case "POST": return Post(req, res);
+        case "GET": await Get(req, res); break;
+        case "POST": await Post(req, res); break;
         default: throw new Error("unexpected method: " + req.method);
     }
 }

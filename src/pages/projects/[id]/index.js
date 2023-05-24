@@ -1,25 +1,39 @@
 import {useRouter} from "next/router";
 import ProjectLayout from "../../../components/project/ProjectLayout";
-import useSWR from "swr";
 import {useEffect} from "react";
-import useLastViewedProjectId from "../../../lib/hooks/useLastViewedProjectId";
+import {WithSessionSSR} from "../../../lib/auth/redirectUnauthorized";
+import axios from "axios";
 
-export default function ProjectPage() {
+export default function ProjectPage(props) {
     const {query} = useRouter();
-    const { SetLastProjectId } = useLastViewedProjectId();
-
-    const {data: project} = useSWR(`http://localhost:3000/api/project/${query.id}`)
 
     useEffect(() => {
-        if (project?.id) SetLastProjectId(project.id)
-
-    }, [project?.id])
+        axios.post("http://localhost:3000/api/project", {projectid: query.id})
+    }, [])
 
     return (
         <ProjectLayout projectId={query.id}>
-            <h2>{project?.name}</h2>
-            <p>{project?.description}</p>
-            <p>{project?.generalactivity}</p>
+            {/*<h2>{project?.name}</h2>*/}
+            {/*<p>{project?.description}</p>*/}
+            {/*<p>{project?.generalactivity}</p>*/}
         </ProjectLayout>
     )
 }
+
+// todo: оно работает, но надо тут выгрузить проект, а в других - считывать projectId
+// todo: authProvider который будет работать на swr изменении пользователя.
+
+
+export const getServerSideProps = WithSessionSSR(async ({req, res}) => {
+
+    if (req.session?.user.lastProjectId)
+    return {
+        props: { lastProjectId: req.session.user.lastProjectId}
+    }
+
+    return {
+        props: {
+            label: "ds"
+        }
+    }
+})

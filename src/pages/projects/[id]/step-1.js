@@ -2,20 +2,15 @@ import StepLayout from "../../../components/step/StepLayout";
 import Input from "../../../components/input/Input";
 import Button from "../../../components/button/Button";
 import useProjectStep from "../../../lib/hooks/useProjectStep";
-import useLastViewedProjectId from "../../../lib/hooks/useLastViewedProjectId";
 import {useEffect} from "react";
+import {WithSessionSSR} from "../../../lib/auth/redirectUnauthorized";
+import axios from "axios";
 
-export default function Step1Page() {
-
-    const { lastProjectId } = useLastViewedProjectId();
+export default function Step1Page({lastProjectId}) {
 
     const { NextStep } = useProjectStep({
         projectId: lastProjectId
     });
-
-    useEffect(() => {
-
-    }, [lastProjectId])
 
     return (
         <StepLayout projectId={lastProjectId}>
@@ -28,4 +23,18 @@ export default function Step1Page() {
     )
 }
 
-// todo: make ssr;
+export const getServerSideProps = WithSessionSSR(async ({req, res}) => {
+    console.log(req)
+    // axios.get("http://localhost:3000/api/project/"+"")
+
+    if (req.session?.user.lastProjectId)
+        return {
+            props: { lastProjectId: req.session.user.lastProjectId}
+        }
+
+    return {
+        props: {
+            label: "ds"
+        }
+    }
+})
