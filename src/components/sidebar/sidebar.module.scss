@@ -7,8 +7,17 @@
   @include flex-column;
   box-sizing: content-box;
   gap: 16px;
-  min-height: 100vh;
+  min-height: calc(100vh - 48px);
 
-  //todo change
-  background: darkblue;
+  &__navigation {
+    flex: 1 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+
+    // todo вынести в global.scss
+    background: rgb(4, 16, 75);
+  }
 }

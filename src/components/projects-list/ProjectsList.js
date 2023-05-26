@@ -11,9 +11,13 @@ function Item({project}) {
         <>
             <ProjectInfoPopup Visibility={Visibility} title={project.name} project={project} />
             <div className={css["list-item"]}>
-                <h3>{project.name}</h3>
-                <p>{project.description}</p>
-                <Button onClick={() => setIsVisible(true)} label={"подбробнее"} />
+                <div className={css["list-item__content"]}>
+                    <h3>{project.name}</h3>
+                    <p>{project.description}</p>
+                </div>
+                <div className={css["list-item__manage-panel"]}>
+                    <Button onClick={() => setIsVisible(true)} label={"подбробнее"} />
+                </div>
             </div>
         </>
     )

@@ -1,16 +1,13 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import ProjectsController from "@/controllers/ProjectsController";
 import {withIronSessionApiRoute} from "iron-session/next";
 import {sessionOptions} from "@/lib/auth/session";
-import * as http from "http";
-//
+
 async function Get(req: NextApiRequest, res: NextApiResponse) {
     if (req.session.user.lastProjectId) {
         return res.json({
             ...req.session.user.lastProjectId,
         })
     }
-
     res.json(null);
 }
 
@@ -21,7 +18,7 @@ async function Post(req: NextApiRequest, res: NextApiResponse) {
     await req.session.save();
     res.json(req.session.user);
 }
-//
+
 async function GetLastViewedProject(req: NextApiRequest, res: NextApiResponse) {
     let result = null;
     switch (req.method) {

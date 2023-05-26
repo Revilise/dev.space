@@ -8,13 +8,11 @@
   }
 
   &__link.active {
-    //todo change
     color: red;
   }
 
   &__section {
     @include flex-column;
-    margin-bottom: 48px;
     & > .navigation__link {
       padding: 8px 8px 8px 24px;
     }
@@ -22,7 +20,7 @@
 
   &__title {
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 20px;
     > .navigation__link_active {
       //todo change
       border: 1px solid white;

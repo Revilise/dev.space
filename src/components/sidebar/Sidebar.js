@@ -29,16 +29,18 @@ export default function Sidebar() {
         <aside className={css.sidebar}>
             <h1>logo</h1>
 
-            <Navigation>
-                <Navigation.Title>
-                    <Navigation.Link href={"/"}>Главная</Navigation.Link>
-                </Navigation.Title>
+            <div className={css.sidebar__navigation}>
+                <Navigation>
+                    <Navigation.Title>
+                        <Navigation.Link href={"/"}>Главная</Navigation.Link>
+                    </Navigation.Title>
 
-                <Navigation.Section>
-                    <Navigation.Title>Проекты</Navigation.Title>
-                    {navProjects?.map((el, i) => <Navigation.Link key={i} isActive={router.asPath == el.href} href={el.href}>{el.name}</Navigation.Link>)}
-                </Navigation.Section>
-            </Navigation>
+                    <Navigation.Section>
+                        <Navigation.Title>Проекты</Navigation.Title>
+                        {navProjects?.map((el, i) => <Navigation.Link key={i} isActive={router.asPath == el.href} href={el.href}>{el.name}</Navigation.Link>)}
+                    </Navigation.Section>
+                </Navigation>
+            </div>
 
             <Button onClick={logout}>
                 <Button.Label>Выйти</Button.Label>

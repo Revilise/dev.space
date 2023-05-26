@@ -8,7 +8,7 @@ import ConfirmPopup from "./ConfirmPopup";
 import axios from "axios";
 import Router from "next/router";
 
-export default function ProjectLayout({children, projectId}) {
+function ProjectLayout({children, projectId}) {
     const url = `/projects/${projectId}`;
 
     const Visibility = useState(false);
@@ -40,3 +40,5 @@ export default function ProjectLayout({children, projectId}) {
         </Layout.Semantic>
     )
 }
+
+export default ProjectLayout;

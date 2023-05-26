@@ -2,8 +2,18 @@
 
 .list {
   @include flex-column;
-  gap: 8px;
+  gap: 12px;
+  padding: 16px;
   &-item {
-    background: pink;
+    padding: 20px 22px;
+    border-radius: 8px;
+    background: rgb(24, 4, 75);
+    &__content {
+      @include flex-column;
+    }
+    &__manage-panel {
+      @include flex;
+      justify-content: right;
+    }
   }
 }
