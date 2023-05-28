@@ -27,13 +27,13 @@ export default function useUserStatus({init_status = null, projectid }) {
 
     function deleteMembershipRecord() {
         axios
-            .delete("http://localhost:3000/api/membership/delete/" + projectid)
+            .post("/api/membership/delete/", { projectid })
             .then(() => setStatus(statuses.null))
     }
 
     function sendInviteRequest() {
         axios
-            .post("http://localhost:3000/api/membership/post", { projectid })
+            .post("/api/membership/post", { projectid })
             .then(() => setStatus(statuses.request))
     }
 
