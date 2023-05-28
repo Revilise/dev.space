@@ -2,25 +2,35 @@
 
 .navigation {
   @include flex-column;
-  gap: 8px;
+  gap: 12px;
   > &__link {
     padding: 8px;
   }
 
   &__link.active {
-    color: red;
+    color: var(--primary-sidebar-text-color);
   }
 
   &__section {
     @include flex-column;
     & > .navigation__link {
-      padding: 8px 8px 8px 24px;
+      color: var(--secondary-sidebar-text-color);
+      padding: 8px 14px;
+      &.active {
+        color: var(--primary-sidebar-text-color) !important;
+      }
     }
   }
 
   &__title {
     font-weight: bold;
     font-size: 20px;
+    @include flex;
+    align-items: center;
+    justify-content: space-between;
+    & + .navigation__link {
+      margin-top: 16px;
+    }
     > .navigation__link_active {
       //todo change
       border: 1px solid white;

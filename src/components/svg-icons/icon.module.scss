@@ -1,30 +1,47 @@
-@mixin styleIcons($class) {
+@mixin styleIcons($class, $IsFill: false) {
   cursor: pointer;
   display: flex;
   path {
     transition: .2s;
-    stroke: rgb(var(--default-icon));
+    stroke: var(--#{$class});
+
+    @if $IsFill {
+      fill: var(--#{$class});
+    }
   }
-  &__active, &:hover {
+
+  &.active, &:hover {
     display: flex;
     path {
-      stroke: rgb(var(--#{$class}));
+      stroke: var(--hover__#{$class});
+
+      @if $IsFill {
+        fill: var(--hover__#{$class});
+      }
     }
   }
 }
 
-.default-icon {
-  @include styleIcons('default-icon')
+@mixin icon-style-constructor($var) {
+  @include styleIcons($var);
+  &-filled-icon {
+    @include styleIcons($var, true)
+  }
 }
-//.green {
-//  @include styleIcons('green-icon')
-//}
-//.red {
-//  @include styleIcons('red-icon')
-//}
-//.alfa-white {
-//  @include styleIcons('default-icon');
-//  path {
-//    stroke: var(--alfa-white);
-//  }
-//}
+
+.default-icon {
+  @include icon-style-constructor(default-icon-color);
+}
+
+.orange-icon {
+  @include icon-style-constructor(orange-icon-color);
+}
+
+.dark-icon {
+  @include icon-style-constructor(dark-icon-color);
+}
+
+[class^="button"]:hover .orange-icon,
+[class^="button"]:active .orange-icon {
+  @extend .orange-icon, :hover;
+}

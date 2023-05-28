@@ -20,7 +20,7 @@ function ProjectLayout({children, projectId}) {
     useEffect(() => {
         if (value) {
             axios
-                .delete("http://localhost:3000/api/membership/delete/" + projectId)
+                .post("/api/membership/delete/",  {projectId} )
                 .then(() => Router.replace("/"))
         }
     }, [value])
@@ -33,7 +33,7 @@ function ProjectLayout({children, projectId}) {
                     <Link href={`${url}/step-1`}>Этап 1</Link>
                     <Link href={`${url}/members`}>Участники</Link>
                     <Link href={`${url}/file-store`}>Хранилище файлов</Link>
-                    <Button onClick={() => setIsVisible(true)}>Покинуть проект</Button>
+                    <Button onClick={() => setIsVisible(true)} label={"Покинуть проект"} />
                 </Header>
                 {children}
             </div>

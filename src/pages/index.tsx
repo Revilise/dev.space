@@ -5,7 +5,7 @@ import ProjectsList from '@/components/projects-list/ProjectsList';
 
 export default function HomePage() {
 
-    const { data: projects } = useSWR("http://localhost:3000/api/project/all");
+    const { data: projects } = useSWR("http://localhost:3000/api/project/get/all");
 
   return (
     <Layout.Semantic>

@@ -1,14 +1,42 @@
 @import 'src/styles/mixins/flex.mixin.scss';
 
+@mixin button-theme-constructor($class) {
+  transition: .2s;
+  background: var(--button-#{$class}-background);
+  color: var(--button-#{$class}-content-color);
+
+  border: 1px solid var(--button-#{$class}-border-color);
+  &:hover {
+    background: var(--hover__button-#{$class}-background);
+    border: 1px solid var(--hover__button-#{$class}-border-color);
+    color: var(--hover__button-#{$class}-content-color);
+  }
+}
+
 .button {
   @include flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
   padding: 4px;
+  border-radius: 8px;
+  font-size: 16px;
+  &.default {
+    @include button-theme-constructor(default);
+  }
+
+  &.transparent {
+    @include button-theme-constructor(transparent);
+  }
+
+  &.orange {
+    @include button-theme-constructor(orange);
+  }
+
   &__label {
     padding: 4px;
   }
+
   &__icon {
 
   }

@@ -2,9 +2,6 @@ import css from './step.module.scss'
 import ProjectLayout from "../project/ProjectLayout";
 
 function StepLayout({children, projectId}) {
-
-
-
     return (
         <ProjectLayout projectId={projectId}>
             <div className={css.step}>
@@ -25,11 +22,10 @@ StepLayout.Main = ({children}) => {
 }
 
 // eslint-disable-next-line react/display-name
-StepLayout.SideTip = ({title, content}) => {
+StepLayout.SideTip = ({children}) => {
     return (
         <div className={css["step-tip"]}>
-            <h2>{title}</h2>
-            <div>{content}</div>
+            {children}
         </div>
     )
 }

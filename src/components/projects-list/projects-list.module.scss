@@ -7,7 +7,10 @@
   &-item {
     padding: 20px 22px;
     border-radius: 8px;
-    background: rgb(24, 4, 75);
+    background: var(--primary-plate-backgound);
+    &:hover {
+      background: var(--hover-plate-background);
+    }
     &__content {
       @include flex-column;
     }

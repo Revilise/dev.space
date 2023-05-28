@@ -3,6 +3,7 @@ import {Project} from "@/models/Project";
 import {pool} from "@/databases/postgesql/db-connection";
 import {QueryConfig} from "pg";
 import {User} from "@/models/User";
+import {query} from "express";
 
 class ProjectsController implements IController<Project> {
     delete(id: number): Promise<boolean> {
@@ -45,7 +46,12 @@ class ProjectsController implements IController<Project> {
     update(id: number, object: Project): Promise<Project> {
         return Promise.resolve(undefined);
     }
-
+    create(userid: number) {
+        const text = "SELECT create_project($1)"
+        return pool
+            .query({text, values: [userid]})
+            .then(data => data.rows[0] ? { projectId: data.rows[0].create_project } : { projectId: null})
+    }
     getAllByUserId(id: number, statusid: number = null): Promise<object[]> {
 
         const text = `

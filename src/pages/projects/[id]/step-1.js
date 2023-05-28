@@ -18,7 +18,13 @@ export default function Step1Page({lastProjectId}) {
                 <Input/>
                 <Button onClick={NextStep}>Следующий этап</Button>
             </StepLayout.Main>
-            <StepLayout.SideTip title={"Этап 1"} content={"описание проекта"}/>
+            <StepLayout.SideTip>
+                <span>Этап 1</span>
+                <h1>Описание проекта</h1>
+                <p>
+                    На данном этапе вам необходимо описать ваш проект. Перейти на следующий этап можно только после заполнения всех полей.
+                </p>
+            </StepLayout.SideTip>
         </StepLayout>
     )
 }

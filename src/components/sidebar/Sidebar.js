@@ -6,6 +6,7 @@ import {useRouter} from "next/router";
 import useNavProjects from "@/lib/hooks/useNavProjects";
 import Icons from "@/components/svg-icons/icons";
 import Button from "@/components/button/Button";
+import Link from "@/components/link/Link";
 
 export default function Sidebar() {
     const {mutateUser} = useUser({
@@ -25,9 +26,19 @@ export default function Sidebar() {
         )
     }
 
+    async function createProject() {
+        axios
+            .post("/api/project/post")
+            .then(res => {
+                if (res.data) router.replace("/projects/" + res.data.projectId)
+            })
+    }
+
     return (
         <aside className={css.sidebar}>
-            <h1>logo</h1>
+            <Link href={"/"}>
+                <Icons.Logo />
+            </Link>
 
             <div className={css.sidebar__navigation}>
                 <Navigation>
@@ -36,8 +47,26 @@ export default function Sidebar() {
                     </Navigation.Title>
 
                     <Navigation.Section>
-                        <Navigation.Title>Проекты</Navigation.Title>
-                        {navProjects?.map((el, i) => <Navigation.Link key={i} isActive={router.asPath == el.href} href={el.href}>{el.name}</Navigation.Link>)}
+                        <Navigation.Title>
+                            Проекты
+                            <Button onClick={createProject} styleType={"transparent"}>
+                                <Icons.Plus />
+                            </Button>
+                        </Navigation.Title>
+                        {navProjects?.map((el, i) =>
+                            {
+                                const href = `/projects/${el.id}`;
+                                return (
+                                    <Navigation.Link
+                                        key={i}
+                                        isActive={router.asPath.includes(href)}
+                                        href={href}
+                                    >
+                                        {el.name}
+                                    </Navigation.Link>
+                                )
+                            }
+                         )}
                     </Navigation.Section>
                 </Navigation>
             </div>

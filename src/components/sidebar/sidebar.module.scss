@@ -8,16 +8,16 @@
   box-sizing: content-box;
   gap: 16px;
   min-height: calc(100vh - 48px);
+  color: var(--primary-sidebar-text-color);
+  background: var(--primary-sidebar-background);
 
   &__navigation {
     flex: 1 0;
+
+    a {
+      color: var(--primary-sidebar-text-color);
+    }
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .sidebar {
 
-    // todo вынести в global.scss
-    background: rgb(4, 16, 75);
-  }
-}

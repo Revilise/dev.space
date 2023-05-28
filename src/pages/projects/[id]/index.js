@@ -11,8 +11,9 @@ export default function ProjectPage(props) {
 
     useEffect(() => {
         if (query.id) {
-            axios.get("http://localhost:3000/api/project/"+query.id).then(res => setProject(res.data));
-            axios.post("http://localhost:3000/api/project", {projectid: query.id})
+            axios
+                .get("/api/project/get/"+query.id)
+                .then(res => setProject(res.data));
         }
     }, [query.id])
 

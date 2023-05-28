@@ -4,9 +4,9 @@ import {sessionOptions} from "@/lib/auth/session";
 import ProjectsController from "@/controllers/ProjectsController";
 
 async function GetProjectById(req: NextApiRequest, res: NextApiResponse) {
-    const {projectid} = req.query;
+    const {id} = req.query;
 
-    const result = await ProjectsController.getById(Number(projectid));
+    const result = await ProjectsController.getById(Number(id));
 
     res.json(result);
 }

@@ -1,8 +1,9 @@
 import css from './icon.module.scss'
 
 const IconWrapper = ({children, cssClass, isActive}) => {
+    const style = `${css[cssClass]} ${isActive ? css.active : ""}}`.trim();
     return (
-        <div className={ isActive ? css[cssClass + "__active"] : css[cssClass] }>
+        <div className={style}>
             {children}
         </div>
     )
@@ -13,6 +14,7 @@ function Icon(
     classStyle = "default-icon"
 ) {
     const Component = () => <IconWrapper cssClass={classStyle}><SVGComponent/></IconWrapper>
+
     // eslint-disable-next-line react/display-name
     Component.Active = () => <IconWrapper isActive={true} cssClass={classStyle}><SVGComponent/></IconWrapper>
     return Component;
@@ -33,7 +35,6 @@ class Icons {
                 <path d="M18 15L12 9L6 15"  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
         ),
-        "green"
     )
 
     static LogOut = new Icon(
@@ -43,7 +44,7 @@ class Icons {
                 <path d="M16.4541 17L21.4541 12L16.4541 7"  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M21.4541 12H9.4541"  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-        )
+        ), "orange-icon"
     )
 
     static Home = new Icon(
@@ -55,7 +56,6 @@ class Icons {
                 <path d="M9.4541 22V12H15.4541V22"  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
         ),
-        "green"
     )
 
     static LogIn = new Icon(
@@ -76,7 +76,6 @@ class Icons {
                 <path d="M8.4541 12H16.4541"  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
         ),
-        "green"
     )
 
     static Settings = new Icon(
@@ -95,7 +94,6 @@ class Icons {
                 </defs>
             </svg>
         ),
-        "green"
     )
 
     static User = new Icon(
@@ -107,7 +105,6 @@ class Icons {
                 <path d="M12.4541 11C14.6632 11 16.4541 9.20914 16.4541 7C16.4541 4.79086 14.6632 3 12.4541 3C10.245 3 8.4541 4.79086 8.4541 7C8.4541 9.20914 10.245 11 12.4541 11Z"  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
         ),
-        "green"
     )
 
     static Search = new Icon(
@@ -116,8 +113,7 @@ class Icons {
                 <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M21 21L16.65 16.65" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-        ),
-        "alfa-white"
+        )
     )
 
     static Save = new Icon(
@@ -127,8 +123,7 @@ class Icons {
                 <path d="M17.4541 21V13H7.4541V21" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M7.4541 3V8H15.4541" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-        ),
-        "green"
+        )
     )
 
     static Trash = new Icon(
@@ -139,8 +134,7 @@ class Icons {
                 <path d="M10.4541 11V17" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M14.4541 11V17" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-        ),
-        "red"
+        )
     )
 
     static Image = new Icon(
@@ -194,9 +188,38 @@ class Icons {
                 <path d="M15 9L9 15" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M9 9L15 15" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-        )
+        ), "dark-icon"
     )
+
+    static Logo = new Icon(() => (
+            <svg width="123" height="70" viewBox="0 0 123 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clipPath="url(#clip0_431_453)">
+                    <path d="M0 25.2V0H11.448C14.184 0 16.596 0.528 18.684 1.584C20.772 2.616 22.404 4.068 23.58 5.94C24.756 7.812 25.344 10.032 25.344 12.6C25.344 15.144 24.756 17.364 23.58 19.26C22.404 21.132 20.772 22.596 18.684 23.652C16.596 24.684 14.184 25.2 11.448 25.2H0ZM5.832 20.412H11.16C12.84 20.412 14.292 20.1 15.516 19.476C16.764 18.828 17.724 17.916 18.396 16.74C19.092 15.564 19.44 14.184 19.44 12.6C19.44 10.992 19.092 9.612 18.396 8.46C17.724 7.284 16.764 6.384 15.516 5.76C14.292 5.112 12.84 4.788 11.16 4.788H5.832V20.412Z" fill="black"/>
+                    <path d="M10.26 69.632C8.244 69.632 6.312 69.368 4.464 68.84C2.616 68.288 1.128 67.58 0 66.716L1.98 62.324C3.06 63.092 4.332 63.728 5.796 64.232C7.284 64.712 8.784 64.952 10.296 64.952C11.448 64.952 12.372 64.844 13.068 64.628C13.788 64.388 14.316 64.064 14.652 63.656C14.988 63.248 15.156 62.78 15.156 62.252C15.156 61.58 14.892 61.052 14.364 60.668C13.836 60.26 13.14 59.936 12.276 59.696C11.412 59.432 10.452 59.192 9.396 58.976C8.364 58.736 7.32 58.448 6.264 58.112C5.232 57.776 4.284 57.344 3.42 56.816C2.556 56.288 1.848 55.592 1.296 54.728C0.768 53.864 0.504 52.76 0.504 51.416C0.504 49.976 0.888 48.668 1.656 47.492C2.448 46.292 3.624 45.344 5.184 44.648C6.768 43.928 8.748 43.568 11.124 43.568C12.708 43.568 14.268 43.76 15.804 44.144C17.34 44.504 18.696 45.056 19.872 45.8L18.072 50.228C16.896 49.556 15.72 49.064 14.544 48.752C13.368 48.416 12.216 48.248 11.088 48.248C9.96 48.248 9.036 48.38 8.316 48.644C7.596 48.908 7.08 49.256 6.768 49.688C6.456 50.096 6.3 50.576 6.3 51.128C6.3 51.776 6.564 52.304 7.092 52.712C7.62 53.096 8.316 53.408 9.18 53.648C10.044 53.888 10.992 54.128 12.024 54.368C13.08 54.608 14.124 54.884 15.156 55.196C16.212 55.508 17.172 55.928 18.036 56.456C18.9 56.984 19.596 57.68 20.124 58.544C20.676 59.408 20.952 60.5 20.952 61.82C20.952 63.236 20.556 64.532 19.764 65.708C18.972 66.884 17.784 67.832 16.2 68.552C14.64 69.272 12.66 69.632 10.26 69.632Z" fill="black"/>
+                    <path d="M88.958 69.632C87.014 69.632 85.202 69.32 83.522 68.696C81.866 68.048 80.426 67.136 79.202 65.96C77.978 64.784 77.018 63.404 76.322 61.82C75.65 60.236 75.314 58.496 75.314 56.6C75.314 54.704 75.65 52.964 76.322 51.38C77.018 49.796 77.978 48.416 79.202 47.24C80.45 46.064 81.902 45.164 83.558 44.54C85.214 43.892 87.026 43.568 88.994 43.568C91.178 43.568 93.146 43.952 94.898 44.72C96.674 45.464 98.162 46.568 99.362 48.032L95.618 51.488C94.754 50.504 93.794 49.772 92.738 49.292C91.682 48.788 90.53 48.536 89.282 48.536C88.106 48.536 87.026 48.728 86.042 49.112C85.058 49.496 84.206 50.048 83.486 50.768C82.766 51.488 82.202 52.34 81.794 53.324C81.41 54.308 81.218 55.4 81.218 56.6C81.218 57.8 81.41 58.892 81.794 59.876C82.202 60.86 82.766 61.712 83.486 62.432C84.206 63.152 85.058 63.704 86.042 64.088C87.026 64.472 88.106 64.664 89.282 64.664C90.53 64.664 91.682 64.424 92.738 63.944C93.794 63.44 94.754 62.684 95.618 61.676L99.362 65.132C98.162 66.596 96.674 67.712 94.898 68.48C93.146 69.248 91.166 69.632 88.958 69.632Z" fill="black"/>
+                    <path d="M35.5382 10.152H47.2382V14.688H35.5382V20.52H49.2542V25.2H29.7422V0H48.7862V4.68H35.5382V10.152Z" fill="black"/>
+                    <path d="M63.146 25.2004L52.274 0.000423312H58.574L66.2379 17.9991L74.018 0.000423312H79.814L68.906 25.2004H63.146Z" fill="black"/>
+                    <path fillRule="evenodd" clipRule="evenodd" d="M24.937 44V69.2H30.769V62.252H35.845C38.101 62.252 40.045 61.892 41.677 61.172C43.309 60.428 44.569 59.372 45.457 58.004C46.345 56.636 46.789 55.016 46.789 53.144C46.789 51.248 46.345 49.616 45.457 48.248C44.569 46.88 43.309 45.836 41.677 45.116C40.045 44.372 38.101 44 35.845 44H24.937ZM35.521 57.5H30.769V48.752H35.521C37.321 48.752 38.665 49.136 39.553 49.904C40.441 50.672 40.885 51.752 40.885 53.144C40.885 54.512 40.441 55.58 39.553 56.348C38.665 57.116 37.321 57.5 35.521 57.5Z" fill="black"/>
+                    <path fillRule="evenodd" clipRule="evenodd" d="M57.607 44L46.375 69.2H52.351L54.5967 63.8H66.2781L68.515 69.2H74.635L63.367 44H57.607ZM64.4439 59.372H56.4381L60.4488 49.7276L64.4439 59.372Z" fill="black"/>
+                    <path d="M120.796 54.152V58.688H109.096V64.52H122.812V69.2H103.3V44H122.344V48.68H109.096V54.152H120.796Z" fill="black"/>
+                </g>
+                <defs>
+                    <clipPath id="clip0_431_453">
+                        <rect width="123" height="70" fill="white"/>
+                    </clipPath>
+                </defs>
+            </svg>
+        ), "default-filled-icon"
+    )
+
+    static Plus = new Icon(() => (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.75 10H15.25" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M10 15.25L10 4.75" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+    ))
 }
 
 export default Icons;
-export const { Home, ChevronDown, ChevronUp, LogIn, LogOut, PlusCircle, Search, User, Settings, Save, Image, Link, Trash, Send, Edit, Close } = Icons;
+
+// export const { Home, Plus, ChevronDown, ChevronUp, LogIn, LogOut, PlusCircle, Search, User, Settings, Save, Image, Link, Trash, Send, Edit, Close, Logo } = Icons;
