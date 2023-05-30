@@ -3,13 +3,13 @@ import {NextApiRequest, NextApiResponse} from "next";
 import {withIronSessionApiRoute} from "iron-session/next";
 import {sessionOptions} from "@/lib/auth/session";
 
-function SignInAPIRoute(req: NextApiRequest, res: NextApiResponse) {
+async function SignInAPIRoute(req: NextApiRequest, res: NextApiResponse) {
     const {email, password} = req.body;
 
     UserController
         .getByAuthData(email, password)
         .then(async (user) => {
-            if (!user.email) return res.json({ok: false});
+            if (!user?.email) return res.json({ok: false});
 
             req.session.user = {...user, isLogged: true};
             await req.session.save();
