@@ -1,8 +1,8 @@
 import css from './button.module.scss';
 
-function Button({children, onClick, label = null}) {
+function Button({children, onClick, label = null, styleType = "default"}) {
     return (
-        <button className={css.button} onClick={onClick}>
+        <button className={`${css.button} ${css[styleType]}`} onClick={onClick}>
             { label ? <Button.Label>{label}</Button.Label> : <></> }
             {children}
         </button>

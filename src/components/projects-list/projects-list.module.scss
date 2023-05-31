@@ -2,8 +2,21 @@
 
 .list {
   @include flex-column;
-  gap: 8px;
+  gap: 12px;
+  padding: 16px;
   &-item {
-    background: pink;
+    padding: 20px 22px;
+    border-radius: 8px;
+    background: var(--primary-plate-backgound);
+    &:hover {
+      background: var(--hover-plate-background);
+    }
+    &__content {
+      @include flex-column;
+    }
+    &__manage-panel {
+      @include flex;
+      justify-content: right;
+    }
   }
 }

@@ -19,7 +19,7 @@ export default function SigninPage() {
         mutateUser(
             await (async function() {
                 const res = await axios
-                                    .post("http://localhost:3000/api/auth/signin", {email, password})
+                                    .post("/api/auth/signin", {email, password})
                                     .then(res => res.data)
                                     .catch(err => console.error(err))
                 if (res.isLogged) return res;

@@ -22,11 +22,10 @@ StepLayout.Main = ({children}) => {
 }
 
 // eslint-disable-next-line react/display-name
-StepLayout.SideTip = ({title, content}) => {
+StepLayout.SideTip = ({children}) => {
     return (
         <div className={css["step-tip"]}>
-            <h2>{title}</h2>
-            <div>{content}</div>
+            {children}
         </div>
     )
 }

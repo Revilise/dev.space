@@ -1,6 +1,8 @@
 @import '../../styles/mixins/flex.mixin';
 
 .before {
+  left: 0;
+  top: 0;
   position: absolute;
   width: 100vw;
   min-height: 100vh;
@@ -11,7 +13,7 @@
 }
 
 .container {
-  background: coral;
+  background: var(--priary-popup-background);
   @include flex-column;
   padding: 24px;
   gap: 8px;

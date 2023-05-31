@@ -8,14 +8,12 @@ async function DeleteFromMembershipByPropjectId(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-   const {id: userid} = req.session.user;
-   const {projectid} = req.query;
+    const { id: userid } = req.session.user;
+    const { projectId } = req.body;
 
-   console.log("something happen")
+    await ProjectMembershipController.deleteByUserAndProjectId(userid, Number(projectId)).catch(err => console.error(err));
 
-   await ProjectMembershipController.deleteByUserAndProjectId(userid, Number(projectid));
-
-   res.json(true);
+    res.json(true);
 }
 
 export default withIronSessionApiRoute(DeleteFromMembershipByPropjectId, sessionOptions);

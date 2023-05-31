@@ -16,7 +16,7 @@ class UserController implements IController<User> {
         const props = keys.join(", ");
         const values = keys.map(key => object[key]);
 
-        const text = `INSERT INTO users (${props}) VALUES(${values.map((el, idx) => `$${idx+1}`)}) RETURNING *`;
+        const text = `INSERT INTO users (${props}) VALUES (${values.map((el, idx) => `$${idx+1}`)}) RETURNING *`;
 
         const config: QueryConfig = {text, values};
 
@@ -47,13 +47,15 @@ class UserController implements IController<User> {
     }
 
     getByAuthData(email: string, password: string): Promise<User> {
-        const text = "SELECT id FROM users WHERE email = $1 AND password = MD5($2)";
+
+        console.log(email, password)
+        const text = "SELECT id FROM users WHERE email = $1 AND password = SHA256($2)";
         const values = [email, password];
 
         return pool
                 .query({text, values})
                 .then(data => data.rows[0])
-                .then(row => row ? this.getById(row.id) : null)
+                .then(row => this.getById(row?.id))
     }
 }
 

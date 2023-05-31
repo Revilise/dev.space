@@ -1,7 +1,7 @@
 import {sessionOptions} from "@/lib/auth/session";
 import {withIronSessionApiRoute} from "iron-session/next";
 
-function LogoutRoute(req, res) {
+async function LogoutRoute(req, res) {
     req.session.destroy();
     res.json({isLogged: false })
 }

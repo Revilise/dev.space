@@ -8,8 +8,8 @@ import ConfirmPopup from "./ConfirmPopup";
 import axios from "axios";
 import Router from "next/router";
 
-export default function ProjectLayout({children, projectId}) {
-    const [url] = useState(`/projects/${projectId}`)
+function ProjectLayout({children, projectId}) {
+    const url = `/projects/${projectId}`;
 
     const Visibility = useState(false);
     const [isVisible, setIsVisible] = Visibility;
@@ -20,7 +20,7 @@ export default function ProjectLayout({children, projectId}) {
     useEffect(() => {
         if (value) {
             axios
-                .delete("http://localhost:3000/api/membership/delete/" + projectId)
+                .post("/api/membership/delete/",  {projectId} )
                 .then(() => Router.replace("/"))
         }
     }, [value])
@@ -33,10 +33,12 @@ export default function ProjectLayout({children, projectId}) {
                     <Link href={`${url}/step-1`}>Этап 1</Link>
                     <Link href={`${url}/members`}>Участники</Link>
                     <Link href={`${url}/file-store`}>Хранилище файлов</Link>
-                    <Button onClick={() => setIsVisible(true)}>Покинуть проект</Button>
+                    <Button onClick={() => setIsVisible(true)} label={"Покинуть проект"} />
                 </Header>
                 {children}
             </div>
         </Layout.Semantic>
     )
 }
+
+export default ProjectLayout;

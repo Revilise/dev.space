@@ -1,17 +1,47 @@
 import {useRouter} from "next/router";
 import ProjectLayout from "../../../components/project/ProjectLayout";
-import useSWR from "swr";
+import {useEffect, useState} from "react";
+import {WithSessionSSR} from "../../../lib/auth/redirectUnauthorized";
+import axios from "axios";
+import Titles from '../../../components/titles/Titles'
 
-export default function ProjectPage() {
+export default function ProjectPage(props) {
     const {query} = useRouter();
+    const [project, setProject] = useState({});
 
-    const {data: project} = useSWR(`http://localhost:3000/api/project/${query.id}`)
+    useEffect(() => {
+        if (query.id) {
+            axios
+                .get("/api/project/get/"+query.id)
+                .then(res => setProject(res.data));
+        }
+    }, [query.id])
 
     return (
         <ProjectLayout projectId={query.id}>
-            <h2>{project?.name}</h2>
+            <Titles.h1>{project?.name}</Titles.h1>
+            <Titles.h2>Описание проекта</Titles.h2>
             <p>{project?.description}</p>
+            <Titles.h2></Titles.h2>
             <p>{project?.generalactivity}</p>
         </ProjectLayout>
     )
 }
+
+// todo: оно работает, но надо тут выгрузить проект, а в других - считывать projectId
+// todo: authProvider который будет работать на swr изменении пользователя.
+
+export const getServerSideProps = WithSessionSSR(async ({req, res}) => {
+    if (!req.session.user) {
+        return {
+            redirect: {
+                destination: '/signin',
+                permanent: false
+            }
+        }
+    }
+
+    return {
+        props: {}
+    }
+})

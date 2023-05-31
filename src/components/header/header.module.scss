@@ -1,8 +1,9 @@
 @import "src/styles/mixins/flex.mixin.scss";
 
 .header {
-  padding: 16px;
-  background: gold;
+  padding: 16px 20px;
   @include flex-row;
   gap: 24px;
+  justify-content: flex-end;
+  align-items: center;
 }
