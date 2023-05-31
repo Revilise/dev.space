@@ -2,9 +2,11 @@
 
 :root {
   --primary-global-background: #FFFFFF;
-  --primary-sidebar-background: #201E1F;
+  --primary-sidebar-background: #29335C;
   --priary-popup-background: #FFFFFF;
   --primary-plate-backgound: #F4F4F8;
+
+  --secondary-global-background: #29335C;
 
   --hover-plate-background: #E6E6EA;
 
@@ -27,6 +29,19 @@
   --button-orange-background: #FF4000;
   --button-orange-border-color: #fd2600;
   --button-orange-content-color: #FFFFFF;
+
+  /* <------------------------------------> */
+
+  /*  green button styles */
+
+  --hover__button-green-background: #6CAE75;
+  --hover__button-green-border-color: #6CAE75;
+  --hover__button-green-content-color: #FFFFFF;
+
+  --button-green-background: #FFFFFF;
+  --button-green-border-color: #6CAE75;
+  --button-green-content-color: #6CAE75;
+
   /* <------------------------------------> */
 
   --button-blue-background: #50B2C0;

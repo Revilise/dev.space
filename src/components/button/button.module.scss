@@ -15,12 +15,14 @@
 
 .button {
   @include flex;
-  justify-content: space-between;
   align-items: center;
   cursor: pointer;
   padding: 4px;
   border-radius: 8px;
   font-size: 16px;
+  justify-content: space-between;
+  text-align: center;
+
   &.default {
     @include button-theme-constructor(default);
   }
@@ -33,11 +35,19 @@
     @include button-theme-constructor(orange);
   }
 
+  &.green {
+    @include button-theme-constructor(green)
+  }
+
   &__label {
     padding: 4px;
+    flex-grow: 1;
   }
 
-  &__icon {
-
+  &__label + &__icon {
+    width: 100%;
+    @include flex;
+    justify-content: end;
   }
+
 }

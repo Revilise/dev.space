@@ -24,7 +24,7 @@
 
 @mixin icon-style-constructor($var) {
   @include styleIcons($var);
-  &-filled-icon {
+  &-filled {
     @include styleIcons($var, true)
   }
 }

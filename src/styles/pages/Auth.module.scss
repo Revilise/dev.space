@@ -1,0 +1,37 @@
+@import "src/styles/mixins/flex.mixin.scss";
+
+.container {
+  @include flex-column;
+  width: 100%;
+  padding: 32px;
+  justify-content: center;
+  background: var(--secondary-global-background);
+}
+.header {
+  @include flex;
+  justify-content: center;
+}
+.form {
+  width: 678px;
+  margin: 0 auto;
+  @include flex-column;
+  background: var(--primary-global-background);
+  padding: 64px;
+
+  gap: 12px;
+  input {
+    padding: 8px 12px;
+  }
+
+  button {
+    margin: 0 auto;
+    width: 50%;
+  }
+
+  .nav {
+    width: 100%;
+    @include flex;
+    gap: 12px;
+    justify-content: center;
+  }
+}

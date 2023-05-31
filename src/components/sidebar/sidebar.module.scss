@@ -6,7 +6,7 @@
   min-width: 160px;
   @include flex-column;
   box-sizing: content-box;
-  gap: 16px;
+  gap:48px;
   min-height: calc(100vh - 48px);
   color: var(--primary-sidebar-text-color);
   background: var(--primary-sidebar-background);
