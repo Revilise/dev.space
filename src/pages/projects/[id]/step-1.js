@@ -5,15 +5,16 @@ import useProjectStep from "../../../lib/hooks/useProjectStep";
 import {WithSessionSSR} from "../../../lib/auth/redirectUnauthorized";
 import {useRouter} from "next/router";
 
-export default function Step1Page({lastProjectId}) {
+export default function Step1Page() {
     const router = useRouter();
 
     const { NextStep } = useProjectStep({
-        projectId: router.query.id
+        projectid: router.query.id
     });
 
+
     return (
-        <StepLayout projectId={lastProjectId}>
+        <StepLayout projectId={router.query.id}>
             <StepLayout.Main>
                 <Input/>
                 <Button onClick={NextStep}>Следующий этап</Button>
@@ -36,8 +37,5 @@ export const getServerSideProps = WithSessionSSR(async ({req, res}) => {
             permanent: false
         }
     }
-    if (req.session?.user.lastProjectId)
-        return {
-            props: { lastProjectId: req.session.user.lastProjectId }
-        }
+    return { props: {} }
 })

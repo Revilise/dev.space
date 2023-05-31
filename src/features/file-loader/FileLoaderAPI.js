@@ -1,11 +1,13 @@
 import FileLoader from "./FileLoader";
-import axios from "axios";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {useRouter} from "next/router";
+import axios from "axios";
 
 export default function FileLoaderAPI({reload}) {
     const [file, setFile] = useState(null);
     const router = useRouter();
+    const inputRef = useRef(null);
+
     function onChange(event) {
         if (event.target.files && event.target.files[0]) {
 
@@ -24,9 +26,14 @@ export default function FileLoaderAPI({reload}) {
 
             // временный костыль на обнолвение всего списка.
             // Лучше переделать на частичное обновление
-            reload();
+
+            if (response) {
+                inputRef.current.value = null;
+                setFile(null);
+                reload();
+            }
         }
     }
 
-    return <FileLoader onChange={onChange} onSubmit={onSubmit} isEnable={!!file}/>
+    return <FileLoader ref={inputRef} onChange={onChange} onSubmit={onSubmit} isEnable={!!file}/>
 }

@@ -1,17 +1,18 @@
 import useProjectStep from "../../../lib/hooks/useProjectStep";
 import StepLayout from "../../../components/step/StepLayout";
 import Button from "../../../components/button/Button";
-import useLastViewedProjectId from "../../../lib/hooks/useLastViewedProjectId";
+import {useRouter} from "next/router";
 
 export default function Step5Page() {
-    const { lastProjectId } = useLastViewedProjectId();
+    const router = useRouter();
 
     const { PrevStep } = useProjectStep({
-        projectId: lastProjectId
+        projectid: router.query.id,
+        initStep: 5
     });
 
     return (
-        <StepLayout projectId={lastProjectId}>
+        <StepLayout projectId={router.query.id}>
             <StepLayout.Main>
                 <Button onClick={PrevStep}>Предыдуший</Button>
             </StepLayout.Main>

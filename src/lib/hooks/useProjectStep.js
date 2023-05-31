@@ -3,13 +3,14 @@ import Router from "next/router";
 
 export default function useProjectStep({
         projectid = null,
-        initStep = null
+        initStep = 1
 }) {
-    const [step, setStep] = useState(initStep ?? 1);
+    const [step, setStep] = useState(initStep);
 
     useEffect(() => {
-        if (projectid)
+        if (projectid) {
             Router.replace(`/projects/${projectid}/step-${step}`);
+        }
     }, [step, projectid])
 
     function NextStep() {
