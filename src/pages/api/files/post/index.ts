@@ -15,7 +15,8 @@ async function PostFile(
         name, type, size, projectid, data: Object.values(bytes)
     });
 
-    const result = await FilesController.insert(file).then(res => res.data)
+    const result = await FilesController.insert(file)
+
     res.json(result)
 }
 

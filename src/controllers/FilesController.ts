@@ -5,8 +5,18 @@ import {QueryConfig} from "pg";
 import projectId from "@/pages/api/files/get/[...projectId]";
 
 class FilesController implements IController<File> {
-    delete(id: number): Promise<boolean> {
-        return Promise.resolve(false);
+    delete(id: number, userid: number): Promise<boolean> {
+
+        const text = `
+                DELETE FROM files as f
+                USING projectmembership as pm
+                WHERE f.projectid = pm.projectid
+                    AND f.id = $1 AND pm.userid = $2; 
+        `
+
+        return pool
+                .query({text, values: [id, userid] })
+                .then(res => res.rowCount > 0)
     }
 
     getAll(): Promise<File[]> {
@@ -34,7 +44,7 @@ class FilesController implements IController<File> {
         const values = [name, type, size, projectid, data];
 
         const config: QueryConfig = {text, values};
-        return pool.query(config).then(data => data.rows);
+        return pool.query(config).then(data => data.rows[0]);
     }
 
     update(id: number, object: File): Promise<File> {

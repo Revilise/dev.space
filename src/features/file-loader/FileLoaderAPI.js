@@ -3,7 +3,7 @@ import {useRef, useState} from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
 
-export default function FileLoaderAPI({reload}) {
+export default function FileLoaderAPI({addFile}) {
     const [file, setFile] = useState(null);
     const router = useRouter();
     const inputRef = useRef(null);
@@ -22,15 +22,12 @@ export default function FileLoaderAPI({reload}) {
 
     async function onSubmit() {
         if (file) {
-            const response = await axios.post('/api/files/post', file);
+            const res = await axios.post('/api/files/post', file);
 
-            // временный костыль на обнолвение всего списка.
-            // Лучше переделать на частичное обновление
-
-            if (response) {
+            if (res.data) {
+                addFile(res.data);
                 inputRef.current.value = null;
                 setFile(null);
-                reload();
             }
         }
     }

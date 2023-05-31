@@ -10,8 +10,12 @@
     background: pink;
     padding: 16px;
     &__header {
-      @include flex;
+      width: 100%;
+      @include flex-row;
       justify-content: space-between;
+    }
+    &__buttons {
+      @include flex-row;
     }
   }
 }

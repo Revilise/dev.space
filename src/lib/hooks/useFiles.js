@@ -10,5 +10,14 @@ export default function useFiles(projectId) {
         })())
     }
 
-    return {files, reload};
+    async function removeFile(file) {
+        await mutateFiles(files.filter(el => el.id !== file.id))
+    }
+
+    async function addFile(file) {
+        const copy = [...files, file];
+        await mutateFiles(copy);
+    }
+
+    return {files, reload, removeFile, addFile};
 }
