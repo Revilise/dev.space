@@ -9,8 +9,12 @@ async function PostFile(
     res: NextApiResponse
 ) {
 
-    const file = new File();
-    file.data = Object.values(req.body.bytes);
+    const {name, type, size, bytes, projectid} = req.body;
+
+    const file = new File({
+        name, type, size, projectid, data: Object.values(bytes)
+    });
+
     const result = await FilesController.insert(file).then(res => res.data)
     res.json(result)
 }

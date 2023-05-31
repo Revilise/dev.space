@@ -2,6 +2,7 @@ import {IController} from "@/controllers/IController";
 import {File} from "@/models/File";
 import {pool} from "@/databases/postgesql/db-connection";
 import {QueryConfig} from "pg";
+import projectId from "@/pages/api/files/get/[...projectId]";
 
 class FilesController implements IController<File> {
     delete(id: number): Promise<boolean> {
@@ -27,9 +28,10 @@ class FilesController implements IController<File> {
     }
 
     insert(object: File): Promise<object> {
+        const {name, type, projectid, size, data} = object;
 
-        const text = `INSERT INTO Files (data) VALUES($1::bytea) RETURNING *`;
-        const values = [object.data];
+        const text = `INSERT INTO Files (name, type, size, projectid, data) VALUES($1, $2, $3, $4, $5::bytea) RETURNING *`;
+        const values = [name, type, size, projectid, data];
 
         const config: QueryConfig = {text, values};
         return pool.query(config).then(data => data.rows);

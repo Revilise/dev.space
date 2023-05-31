@@ -1,33 +1,30 @@
 import FileLoader from "./FileLoader";
 import axios from "axios";
 import {useState} from "react";
+import {useRouter} from "next/router";
 
-export default function FileLoaderAPI() {
+export default function FileLoaderAPI({reload}) {
     const [file, setFile] = useState(null);
-
+    const router = useRouter();
     function onChange(event) {
         if (event.target.files && event.target.files[0]) {
 
             event.target.files[0].arrayBuffer().then(resp => {
+                const {name, type, size} = event.target.files[0];
                 let ui8 = new Uint8Array(resp);
                 let rawData = [...ui8];
-                setFile(rawData);
+                setFile({name, type, size, projectid: router.query.id, bytes: rawData});
             })
-
-            // let reader = new FileReader();
-            // reader.onloadend = (e) => {
-            //     reader.result;
-            //     setFile(bytes);
-            // };
-            // reader.readAsArrayBuffer(event.target.files[0]);
         }
     }
 
     async function onSubmit() {
         if (file) {
-            const response = await axios.post('/api/files/post', {bytes: file});
+            const response = await axios.post('/api/files/post', file);
 
-            console.log("RESPONSE", response);
+            // временный костыль на обнолвение всего списка.
+            // Лучше переделать на частичное обновление
+            reload();
         }
     }
 

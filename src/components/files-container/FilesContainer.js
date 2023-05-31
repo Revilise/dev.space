@@ -22,7 +22,7 @@ function FilesContainer({files = []}) {
                 const {onClick} = FileDescriber(file);
                 // // return <Item key={idx} title={file.title} />
                 return <div key={idx}>
-                    <button onClick={onClick}>href</button>
+                    <button onClick={onClick}>{file.name}</button>
                 </div>
             })}
         </div>
@@ -30,7 +30,7 @@ function FilesContainer({files = []}) {
 }
 
 // eslint-disable-next-line react/display-name
-function Item({title, size, fileId}) {
+function Item({file}) {
     return (
         <div className={css["get-item"]}>
             <header className={css["get-item__header"]}>
