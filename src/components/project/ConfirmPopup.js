@@ -12,12 +12,13 @@ const Layout = (props) => {
 
     return (
         <>
+            <span>Вы действительно хотите покинуть проект?</span>
             <Button onClick={() => Solve(true)}>Да</Button>
             <Button onClick={() => Solve(false)}>Отменить</Button>
         </>
     )
 }
 
-const ConfirmPopup = (props) => PopupBuilder(Layout)(props)
+const ConfirmPopup = (props) => PopupBuilder(Layout)({...props, title: "Покинуть проект"})
 
 export default ConfirmPopup;

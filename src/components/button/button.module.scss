@@ -11,6 +11,13 @@
     border: 1px solid var(--hover__button-#{$class}-border-color);
     color: var(--hover__button-#{$class}-content-color);
   }
+
+  &:disabled {
+    background: var(--disabled__button-#{$class}-background);
+    border: 1px solid var(--disabled__button-#{$class}-border-color);
+    color: var(--disabled__button-#{$class}-content-color);
+
+  }
 }
 
 .button {
@@ -47,7 +54,7 @@
   &__label + &__icon {
     width: 100%;
     @include flex;
-    justify-content: end;
+    justify-content: flex-end;
   }
 
 }

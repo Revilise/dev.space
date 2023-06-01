@@ -1,5 +1,8 @@
 @import 'src/styles/mixins/flex.mixin.scss';
 
-.input {
+.container {
   @include flex-column;
+  .input {
+    padding: 8px 12px;
+  }
 }

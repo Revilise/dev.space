@@ -1,8 +1,8 @@
 import css from './button.module.scss';
 
-function Button({children, onClick, label = null, styleType = "default"}) {
+function Button({children, onClick, label = null, styleType = "default", isEnable = true}) {
     return (
-        <button className={`${css.button} ${css[styleType]}`} onClick={onClick}>
+        <button disabled={!isEnable} className={`${css.button} ${css[styleType]}`} onClick={onClick}>
             { label ? <Button.Label>{label}</Button.Label> : <></> }
             {children}
         </button>

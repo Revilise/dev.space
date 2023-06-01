@@ -7,6 +7,7 @@ import {useRouter} from "next/router";
 import {Project} from "../../../models/Project";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import css from '../../../styles/pages/ProjectStep.module.scss'
 
 const fields = [
     {name: "name", ru: "название проекта"},
@@ -21,12 +22,16 @@ export default function Step1Page() {
     const router = useRouter();
 
     const [project, setProject] = useState(new Project())
+    const [isEnable, setIsEnable] = useState(false);
 
     useEffect(() => {
         if (router.query.id)
             axios
                 .get("/api/project/get/"+router.query.id)
-                .then(res => setProject(res.data))
+                .then(res => {
+                    setProject(res.data);
+                    updateEnable(res.data);
+                })
 
     }, [router.query.id])
 
@@ -35,15 +40,35 @@ export default function Step1Page() {
     });
 
     function OnFieldChange(e) {
-        console.log(e.target.name)
         project[e.target.name] = e.target.value;
-        setProject(Object.assign(new Project(), project));
+        const temp = Object.assign(new Project(), project);
+        setProject(temp);
+        updateEnable(temp);
+    }
+
+    function updateEnable(temp) {
+        const values = []
+        for (let f of fields) {
+            values.push(temp[f.name]);
+        }
+
+        setIsEnable(values.every(e => !!e))
+    }
+
+    function onSubmit() {
+        axios.post('/api/project/update/', {
+            project,
+            projectid: router.query.id
+        }).then(res => {
+            if (res.data.ok)
+                NextStep()
+        })
     }
 
     return (
         <StepLayout projectId={router.query.id}>
             <StepLayout.Main>
-                <form>
+                <form onSubmit={e => e.preventDefault()} className={css.form}>
                     { fields.map((f, i) => (
                         <Input
                             key={i}
@@ -54,8 +79,12 @@ export default function Step1Page() {
                             required={true}
                         />
                     )) }
+                    <div className={css.buttons}>
+                        <Button isEnable={isEnable} onClick={onSubmit}>
+                            <Button.Label>Следующий этап</Button.Label>
+                        </Button>
+                    </div>
                 </form>
-                <Button onClick={NextStep}>Следующий этап</Button>
             </StepLayout.Main>
             <StepLayout.SideTip>
                 <span>Этап 1</span>

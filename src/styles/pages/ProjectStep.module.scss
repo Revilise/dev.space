@@ -1,0 +1,12 @@
+@import "src/styles/mixins/flex.mixin.scss";
+
+.form {
+  @include flex-column;
+  gap: 16px;
+  .buttons {
+    @include flex;
+    > button {
+      flex-grow: 1;
+    }
+  }
+}

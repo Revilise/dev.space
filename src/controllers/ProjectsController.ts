@@ -43,8 +43,30 @@ class ProjectsController implements IController<Project> {
                 .then(data => User.Parse(data.rows[0]));
     }
 
-    update(id: number, object: Project): Promise<Project> {
-        return Promise.resolve(undefined);
+    update(id: number, object: Project): Promise<boolean> {
+        let temp = [];
+        const values = [];
+
+        let i = 1;
+        for (let k in object) {
+            if (object[k] && k !== "id") {
+                values.push(object[k]);
+                temp.push(`${k} = $${i}`);
+                i++;
+            }
+        }
+
+        if (temp.length) {
+            const text = `
+                UPDATE projects SET ${temp.join(', ')} WHERE id = $${temp.length + 1} RETURNING *;
+            `
+
+            return pool
+                .query({text, values: [...values, id]})
+                .then(res => res.rowCount > 0)
+        }
+
+        return Promise.resolve(false);
     }
     create(userid: number) {
         const text = "SELECT create_project($1)"

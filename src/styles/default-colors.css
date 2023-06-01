@@ -1,0 +1,68 @@
+
+:root {
+    --primary-global-background: #FFFFFF;
+    --primary-sidebar-background: #29335C;
+    --priary-popup-background: #FFFFFF;
+    --primary-plate-backgound: #F4F4F8;
+
+    --secondary-global-background: #29335C;
+
+    --hover-plate-background: #E6E6EA;
+
+    /* default button styles --------------> */
+    --hover__button-default-background: #E6E6EA;
+    --hover__button-default-border-color: #E6E6EA;
+    --hover__button-default-content-color: #201E1F;
+
+    --button-default-background: #F4F4F8;
+    --button-default-border-color: #E6E6EA;
+    --button-default-content-color: #201E1F;
+
+    --disabled__button-default-background: #d5d5d5;
+    --disabled__button-default-content-color: #888888;
+    --disabled__button-default-border-color: #E6E6EA;
+    /* <------------------------------------> */
+
+
+    /* default button styles --------------> */
+    --hover__button-orange-background: #E6E6EA;
+    --hover__button-orange-border-color: #E6E6EA;
+    --hover__button-orange-content-color: #FF4000;
+
+    --button-orange-background: #FF4000;
+    --button-orange-border-color: #fd2600;
+    --button-orange-content-color: #FFFFFF;
+
+    /* <------------------------------------> */
+
+    /*  green button styles */
+
+    --hover__button-green-background: #6CAE75;
+    --hover__button-green-border-color: #6CAE75;
+    --hover__button-green-content-color: #FFFFFF;
+
+    --button-green-background: #FFFFFF;
+    --button-green-border-color: #6CAE75;
+    --button-green-content-color: #6CAE75;
+
+    /* <------------------------------------> */
+
+    --button-blue-background: #50B2C0;
+
+    --primary-text-color: #201E1F;
+    --primary-sidebar-text-color: #FFFFFF;
+    --secondary-sidebar-text-color: #A6A5A5;
+
+
+    /* icons themes                           */
+    --default-icon-color: #FFFFFF;
+    --hover__default-icon-color: #FFFFFF;
+
+    --orange-icon-color: #FF4000;
+    --hover__orange-icon-color: #ff8559;
+
+    --dark-icon-color: #201E1F;
+    --hover__dark-icon-color: #606060;
+
+    /* <------------------------------------> */
+}
