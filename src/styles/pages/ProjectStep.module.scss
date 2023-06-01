@@ -3,6 +3,7 @@
 .form {
   @include flex-column;
   gap: 16px;
+  padding-bottom: 36px;
 }
 
 .buttons {

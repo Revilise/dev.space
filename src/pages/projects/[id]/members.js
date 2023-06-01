@@ -1,13 +1,14 @@
 import {WithSessionSSR} from "../../../lib/auth/redirectUnauthorized";
-import Titles from "../../../components/titles/Titles";
 import ProjectLayout from "../../../components/project/ProjectLayout";
 import {useRouter} from "next/router";
+import StepLayout from "../../../components/step/StepLayout";
 
 export default function MembersPage() {
     const router = useRouter();
     return (
         <ProjectLayout projectId={router.query.id}>
             <h1>Участники</h1>
+            
         </ProjectLayout>
     )
 }

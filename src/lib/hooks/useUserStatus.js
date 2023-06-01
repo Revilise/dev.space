@@ -1,43 +1,44 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import useSWR from "swr";
 
 export const statuses = {
-    request: "request",
-    invite: "invite",
+    "1": "request",
+    "2": "invite",
     null: null,
 }
 
-export default function useUserStatus({init_status = null, projectid }) {
-    const [status, setStatus] = useState(init_status);
+export default function useUserStatus({ projectid }) {
+    const {data: membership, mutate: mutateMembersip} = useSWR('/api/membership/get/'+projectid)
 
     function updateUserStatus() {
-        switch (statuses[status]) {
-            case statuses.request :
+        switch (membership?.userstatus) {
+            case statuses["1"] :
                 deleteMembershipRecord();
                 break;
-            case statuses.invite :
+            case statuses["2"] :
                 deleteMembershipRecord();
                 break;
-            case statuses.null :
+            default:
                 sendInviteRequest();
-                break;
-            default: throw new Error("unexpected status: " + status);
         }
     }
 
-    function deleteMembershipRecord() {
-        axios
-            .post("/api/membership/delete/", { projectid })
-            .then(() => setStatus(statuses.null))
+    async function deleteMembershipRecord() {
+        await mutateMembersip(await (async () => {
+            return axios
+                .post("/api/membership/delete/"+projectid)
+                .then(() => statuses.null)
+        })())
     }
 
-    function sendInviteRequest() {
-        axios
-            .post("/api/membership/post", { projectid })
-            .then(() => setStatus(statuses.request))
+    async function sendInviteRequest() {
+        await mutateMembersip(await (async () => {
+            return axios
+                .post("/api/membership/post", { projectid })
+                .then(() => statuses["1"])
+        })())
     }
 
-    useEffect(() => {}, [status, projectid])
-
-    return { status, updateUserStatus }
+    return { status: membership?.userstatus, updateUserStatus }
 }

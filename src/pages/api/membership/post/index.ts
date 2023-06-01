@@ -1,8 +1,8 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import ProjectMembershipController from "@/controllers/ProjectMembershipController";
+import MembershipController from "@/controllers/MembershipController";
 import {withIronSessionApiRoute} from "iron-session/next";
 import {sessionOptions} from "@/lib/auth/session";
-import {ProjectMembership} from "@/models/ProjectMembership";
+import {Membership} from "@/models/Membership";
 
 async function PostDefaultMembership(
     req: NextApiRequest,
@@ -11,12 +11,12 @@ async function PostDefaultMembership(
     const {id: userid} = req.session.user;
     const {projectid} = req.body;
 
-    const temp = new ProjectMembership({
+    const temp = new Membership({
         projectid,
         userid
     });
 
-    await ProjectMembershipController.insert(temp);
+    await MembershipController.insert(temp);
 
     res.json(true);
 }

@@ -27,7 +27,6 @@ export default function SignupPage() {
     const [user, setUser] = useState(new User());
 
     function OnFieldChange(e) {
-        console.log(e.target.name)
         user[e.target.name] = e.target.value;
         setUser(Object.assign(new User(), user));
     }

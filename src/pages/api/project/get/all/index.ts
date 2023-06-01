@@ -6,7 +6,7 @@ import {sessionOptions} from "@/lib/auth/session";
 async function GetAllProjects(req: NextApiRequest, res: NextApiResponse) {
     const {id} = req.session.user;
 
-    const result = await ProjectsController.getAllByUserId(id);
+    const result = await ProjectsController.getAll(id);
 
     res.json(result);
 }

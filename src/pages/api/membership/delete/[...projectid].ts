@@ -1,17 +1,16 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {withIronSessionApiRoute} from "iron-session/next";
 import {sessionOptions} from "@/lib/auth/session";
-import {ProjectMembership} from "@/models/ProjectMembership";
-import ProjectMembershipController from "@/controllers/ProjectMembershipController";
+import MembershipController from "@/controllers/MembershipController";
 
 async function DeleteFromMembershipByPropjectId(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
     const { id: userid } = req.session.user;
-    const { projectId } = req.body;
+    const [ projectid ] = req.query.projectid;
 
-    await ProjectMembershipController.deleteByUserAndProjectId(userid, Number(projectId)).catch(err => console.error(err));
+    await MembershipController.deleteByUserAndProjectId(userid, Number(projectid))
 
     res.json(true);
 }

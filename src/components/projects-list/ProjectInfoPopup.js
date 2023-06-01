@@ -1,8 +1,9 @@
 import PopupBuilder from "../../features/popup/PopupBuilder";
 import useUserStatus, {statuses} from "../../lib/hooks/useUserStatus";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import css from "../../features/popup/popup.module.scss";
 import Button from "../button/Button";
+import fields from "@/lib/projectFields";
 
 const Layout = ({project}) => {
     const { status, updateUserStatus }  = useUserStatus({
@@ -13,23 +14,25 @@ const Layout = ({project}) => {
 
     useEffect(() => {
         switch (status) {
-            case statuses.invite:
+            case statuses["2"]:
                 setLabel("Прекратить участие в команде");
                 break;
-            case statuses.request:
+            case statuses["1"]:
                 setLabel("Отменить заявку на участие");
                 break;
-            case statuses.null:
-                setLabel("Подать заявку на участие");
-                break;
             default:
-                throw new Error("unexpected status: " + status);
+                setLabel("Подать заявку на участие");
         }
     },[status])
 
     return (
         <>
-            <p>{project.description}</p>
+            {fields.map((f,i) => (
+                <React.Fragment key={i}>
+                    <h2>{f.ru}</h2>
+                    <p>{project[f.name] ?? ""}</p>
+                </React.Fragment>
+            ))}
             <div className={css.buttons}>
                 <Button onClick={updateUserStatus} label={label}></Button>
             </div>
@@ -37,6 +40,6 @@ const Layout = ({project}) => {
     )
 }
 
-const ProjectInfoPopup = (props) => PopupBuilder(Layout)(props);
+const ProjectInfoPopup = (props) => PopupBuilder(Layout)({...props, title: " "});
 
 export default ProjectInfoPopup;

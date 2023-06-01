@@ -1,6 +1,6 @@
 import {Entity} from "@/models/Entity";
 
-export class ProjectMembership extends Entity {
+export class Membership extends Entity {
     constructor(props) {
         super();
         if (props)
@@ -13,8 +13,8 @@ export class ProjectMembership extends Entity {
     userid: number = null
     userStatusid: number = null
 
-    static Parse = (object) => super.Parse(object, ProjectMembership);
-    static Create = (props) => new ProjectMembership(props);
+    static Parse = (object) => super.Parse(object, Membership);
+    static Create = (props) => new Membership(props);
 
     toObject(): object {
         return super.toObject();

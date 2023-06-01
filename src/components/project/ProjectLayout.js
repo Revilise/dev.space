@@ -23,7 +23,7 @@ function ProjectLayout({children, projectId: id}) {
     useEffect(() => {
         if (value) {
             axios
-                .post("/api/membership/delete/",  {id} )
+                .post("/api/membership/delete/"+id)
                 .then(() => Router.replace("/"))
         }
     }, [value])

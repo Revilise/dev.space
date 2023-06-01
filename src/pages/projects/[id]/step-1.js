@@ -44,12 +44,19 @@ export default function Step1Page() {
         setIsEnable(values.every(e => !!e))
     }
 
-    function onSubmit() {
-        project.stepnumber = 2;
-        axios.post('/api/project/update/', {
+   async function save() {
+
+        return axios.post('/api/project/update/', {
             project,
             projectid: id
         }).then(res => {
+            console.log(res)
+            return res;
+        })
+    }
+    function onSubmit() {
+        project.stepnumber = 2;
+        save().then(res => {
             if (res.data.ok)
                 NextStep()
         })
@@ -72,6 +79,9 @@ export default function Step1Page() {
                     <div className={css.buttons}>
                         <Button isEnable={isEnable} onClick={onSubmit}>
                             <Button.Label>Следующий этап</Button.Label>
+                        </Button>
+                        <Button onClick={save}>
+                            <Button.Label>Сохранить</Button.Label>
                         </Button>
                     </div>
                 </form>

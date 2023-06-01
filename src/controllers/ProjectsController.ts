@@ -74,16 +74,16 @@ class ProjectsController implements IController<Project> {
             .query({text, values: [userid]})
             .then(data => data.rows[0] ? { projectId: data.rows[0].create_project } : { projectId: null})
     }
-    getAllByUserId(id: number, statusid: number = null): Promise<object[]> {
-
-        const text = `
-            SELECT pr.*, p.userid, CASE
-                WHEN userid = $1 THEN u.name
-                END as userStatus
-            FROM projects as pr
-            LEFT JOIN projectmembership p on pr.id = p.projectid
-            LEFT JOIN "userStatuses" u on u.id = p."userStatusid"
-            ${statusid ? "WHERE u.id = $2" : ''}`;
+    getAllByUserId(id: number, statusid: number): Promise<object[]> {
+         const text = `
+                SELECT p.userid, pr.*, CASE
+                    WHEN p.userid = $1 THEN u.name
+                    END as userStatus
+                FROM projects as pr
+                LEFT JOIN Membership p on pr.id = p.projectid
+                LEFT JOIN "userStatuses" u on u.id = p."userStatusid"
+                WHERE p.userid = $1 AND u.id = $2;
+             `
 
         const values = statusid ? [id, statusid] : [id];
         return pool

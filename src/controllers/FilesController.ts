@@ -2,14 +2,13 @@ import {IController} from "@/controllers/IController";
 import {File} from "@/models/File";
 import {pool} from "@/databases/postgesql/db-connection";
 import {QueryConfig} from "pg";
-import projectId from "@/pages/api/files/get/[...projectId]";
 
 class FilesController implements IController<File> {
     delete(id: number, userid: number): Promise<boolean> {
 
         const text = `
                 DELETE FROM files as f
-                USING projectmembership as pm
+                USING Membership as pm
                 WHERE f.projectid = pm.projectid
                     AND f.id = $1 AND pm.userid = $2; 
         `
