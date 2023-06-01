@@ -19,7 +19,13 @@ export default function Step2Page() {
                     <Button onClick={NextStep}>Следующий этап</Button>
                 </div>
             </StepLayout.Main>
-            <StepLayout.SideTip title={"Этап 2"} content={"Исследование источников"}/>
+            <StepLayout.SideTip>
+                <span>Этап 2</span>
+                <h1>Исследование источников</h1>
+                <p>
+                    На данном этапе вам необходимо исследовать предложенные источники и загрузить данные в хранилище проекта.
+                </p>
+            </StepLayout.SideTip>
         </StepLayout>
     )
 }

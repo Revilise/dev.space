@@ -16,7 +16,13 @@ export default function Step5Page() {
             <StepLayout.Main>
                 <Button onClick={PrevStep}>Предыдуший</Button>
             </StepLayout.Main>
-            <StepLayout.SideTip title={"Этап 5"} content={"Формулировка отчета"}/>
+            <StepLayout.SideTip>
+                <span>Этап 5</span>
+                <h1>Формулировка отчета</h1>
+                <p>
+                    ...
+                </p>
+            </StepLayout.SideTip>
         </StepLayout>
     )
 }

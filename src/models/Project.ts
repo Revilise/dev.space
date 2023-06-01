@@ -18,8 +18,8 @@ export class Project extends Entity {
     geography: string = ""
     expectedresults: string = ""
     report: string = ""
-    stepnumber: number = null
-    adminid: number = null
+    stepnumber: number = 0
+    adminid: number = 0
 
     static Parse = (object) => super.Parse(object, Project);
 

@@ -19,7 +19,13 @@ export default function Step4Page() {
                     <Button onClick={NextStep}>Следующий этап</Button>
                 </div>
             </StepLayout.Main>
-            <StepLayout.SideTip title={"Этап 4"} content={"Обработка данных"}/>
+            <StepLayout.SideTip>
+                <span>Этап 4</span>
+                <h1>Обработка данных</h1>
+                <p>
+                    ...
+                </p>
+            </StepLayout.SideTip>
         </StepLayout>
     )
 }
