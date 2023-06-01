@@ -62,7 +62,7 @@ export default function Sidebar() {
                                         isActive={router.asPath.includes(href)}
                                         href={href}
                                     >
-                                        {el.name}
+                                        {el.name.substring(0, 64) + "..."}
                                     </Navigation.Link>
                                 )
                             }

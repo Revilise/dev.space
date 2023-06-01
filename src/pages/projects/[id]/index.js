@@ -1,29 +1,24 @@
 import {useRouter} from "next/router";
 import ProjectLayout from "../../../components/project/ProjectLayout";
-import {useEffect, useState} from "react";
 import {WithSessionSSR} from "../../../lib/auth/redirectUnauthorized";
-import axios from "axios";
-import Titles from '../../../components/titles/Titles'
+import useProject from "../../../lib/hooks/useProject";
+import fields from "../../../lib/projectFields";
+import React from 'react';
 
-export default function ProjectPage(props) {
+export default function ProjectPage() {
     const {query} = useRouter();
-    const [project, setProject] = useState({});
-
-    useEffect(() => {
-        if (query.id) {
-            axios
-                .get("/api/project/get/"+query.id)
-                .then(res => setProject(res.data));
-        }
-    }, [query.id])
+    const {project} = useProject(query.id);
 
     return (
         <ProjectLayout projectId={query.id}>
-            <Titles.h1>{project?.name}</Titles.h1>
-            <Titles.h2>Описание проекта</Titles.h2>
-            <p>{project?.description}</p>
-            <Titles.h2></Titles.h2>
-            <p>{project?.generalactivity}</p>
+            <h1>{project?.name}</h1>
+
+            {fields.map((f,i) => (
+                <React.Fragment key={i}>
+                    <h2>{f.ru}</h2>
+                    <p>{project[f.name] ?? ""}</p>
+                </React.Fragment>
+                ))}
         </ProjectLayout>
     )
 }

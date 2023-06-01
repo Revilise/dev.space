@@ -3,7 +3,7 @@ import {useRef, useState} from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
 
-export default function FileLoaderAPI({addFile}) {
+export default function FileLoaderAPI({addFile = () => {}}) {
     const [file, setFile] = useState(null);
     const router = useRouter();
     const inputRef = useRef(null);

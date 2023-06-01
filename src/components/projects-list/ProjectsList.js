@@ -16,7 +16,7 @@ function Item({project}) {
                     <p>{project.description}</p>
                 </div>
                 <div className={css["list-item__manage-panel"]}>
-                    <Button onClick={() => setIsVisible(true)} label={"подбробнее"} />
+                    <Button styleType={"green"} onClick={() => setIsVisible(true)} label={"подбробнее"} />
                 </div>
             </div>
         </>

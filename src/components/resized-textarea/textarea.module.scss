@@ -1,0 +1,13 @@
+.container {
+  .textarea {
+    resize: none;
+    padding: 8px 12px;
+    background: transparent;
+    outline: none;
+    font-size: 18px;
+    overflow: hidden;
+    border: 1px solid black;
+    width: 100%;
+    height: auto;
+  }
+}

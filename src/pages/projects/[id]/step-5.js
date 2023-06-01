@@ -2,6 +2,7 @@ import useProjectStep from "../../../lib/hooks/useProjectStep";
 import StepLayout from "../../../components/step/StepLayout";
 import Button from "../../../components/button/Button";
 import {useRouter} from "next/router";
+import css from "../../../styles/pages/ProjectStep.module.scss";
 
 export default function Step5Page() {
     const router = useRouter();
@@ -14,7 +15,9 @@ export default function Step5Page() {
     return (
         <StepLayout projectId={router.query.id}>
             <StepLayout.Main>
-                <Button onClick={PrevStep}>Предыдуший</Button>
+                <Button onClick={PrevStep}>
+                    <Button.Label>Предыдуший</Button.Label>
+                </Button>
             </StepLayout.Main>
             <StepLayout.SideTip>
                 <span>Этап 5</span>

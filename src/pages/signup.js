@@ -25,9 +25,6 @@ export default function SignupPage() {
     })
 
     const [user, setUser] = useState(new User());
-    const Visibility = useState(false);
-    const [v, changeVisibility] = Visibility;
-
 
     function OnFieldChange(e) {
         console.log(e.target.name)
@@ -42,8 +39,6 @@ export default function SignupPage() {
                 await (async function () {
                     const res = await axios.post("http://localhost:3000/api/auth/signup", {user: user.toObject()}).catch(err => console.error(err))
                     if (res?.isLogged) return res;
-
-                    changeVisibility(true);
                 })()
             )
         }
@@ -51,9 +46,7 @@ export default function SignupPage() {
 
     return (
         <Layout>
-            <Popup Visibility={Visibility} title={"Ошибка авторизации"} message={"Неверный логин или пароль"}/>
             <div className={css.container}>
-
                 <form className={css.form} onSubmit={e => e.preventDefault()}>
                     <header className={css.header}>
                         <h1>DEV.SPACE</h1>

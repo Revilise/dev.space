@@ -8,35 +8,24 @@ import {Project} from "../../../models/Project";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import css from '../../../styles/pages/ProjectStep.module.scss'
-
-const fields = [
-    {name: "name", ru: "название проекта"},
-    {name: "description", ru: "описание"},
-    {name: "goals", ru: "цели"},
-    {name: "generalactivity", ru: "основная активность в рамках проекта"},
-    {name: "geography", ru: "география"},
-    {name: "expectedresults", ru: "ожидаемые результаты"},
-]
+import useProject from "../../../lib/hooks/useProject";
+import fields from "../../../lib/projectFields";
+import Textarea from "../../../components/resized-textarea/Textarea";
 
 export default function Step1Page() {
-    const router = useRouter();
+    const {id} = useRouter().query;
 
-    const [project, setProject] = useState(new Project())
+    const {project: _project} = useProject(id);
+    const [project, setProject] = useState(_project);
     const [isEnable, setIsEnable] = useState(false);
 
     useEffect(() => {
-        if (router.query.id)
-            axios
-                .get("/api/project/get/"+router.query.id)
-                .then(res => {
-                    setProject(res.data);
-                    updateEnable(res.data);
-                })
-
-    }, [router.query.id])
+        setProject(_project);
+        updateEnable(project);
+    }, [_project.id])
 
     const { NextStep } = useProjectStep({
-        projectid: router.query.id
+        projectid: id
     });
 
     function OnFieldChange(e) {
@@ -56,9 +45,10 @@ export default function Step1Page() {
     }
 
     function onSubmit() {
+        project.stepnumber = 2;
         axios.post('/api/project/update/', {
             project,
-            projectid: router.query.id
+            projectid: id
         }).then(res => {
             if (res.data.ok)
                 NextStep()
@@ -66,11 +56,11 @@ export default function Step1Page() {
     }
 
     return (
-        <StepLayout projectId={router.query.id}>
+        <StepLayout projectId={id}>
             <StepLayout.Main>
                 <form onSubmit={e => e.preventDefault()} className={css.form}>
                     { fields.map((f, i) => (
-                        <Input
+                        <Textarea
                             key={i}
                             label={f.ru}
                             value={project[f.name] ?? ""}

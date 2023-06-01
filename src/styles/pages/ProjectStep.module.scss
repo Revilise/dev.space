@@ -3,10 +3,12 @@
 .form {
   @include flex-column;
   gap: 16px;
-  .buttons {
-    @include flex;
-    > button {
-      flex-grow: 1;
-    }
+}
+
+.buttons {
+  @include flex;
+  gap: 16px;
+  > button {
+    flex-grow: 1;
   }
 }
