@@ -6,8 +6,8 @@ import {useState} from "react";
 import useUser from "../lib/hooks/useUser";
 
 import css from '../styles/pages/Auth.module.scss'
-import Link from "../components/link/Link";
 import Popup from "../features/popup/Popup";
+import Link from "next/link";
 
 export default function SigninPage() {
     const {mutateUser} = useUser({

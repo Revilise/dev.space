@@ -9,3 +9,5 @@ export const pool = new Pool({
     user: env.SQL_USER,
     port: env.SQL_PORT
 });
+
+export const execute = async (args, fetcher) => pool.query(args).then(fetcher).catch(err => console.error(err));

@@ -9,7 +9,7 @@ async function GetFilesByProjectId(
 ) {
     const [projectId] = req.query.projectId;
 
-    const result = await FilesController.getAllByProjectId(Number(projectId));
+    const result = await FilesController.GetAll({projectid: Number(projectId)});
 
     res.json(result);
 }

@@ -31,3 +31,14 @@ export class FetchError extends Error {
         this.data = data ?? { message: message };
     }
 }
+
+export function ControllerFetcher(type) {
+    switch (type) {
+        case "array" : return (res) => res.rows;
+        case "count" : return (res) => res.rowCount;
+        case "one" : return (res) => res.rowCount > 0 ? res.rows[0] : null;
+        case "bool" : return (res) => res.rowCount > 0;
+
+        default: throw new Error("unexpected fetcher type:" + type);
+    }
+}

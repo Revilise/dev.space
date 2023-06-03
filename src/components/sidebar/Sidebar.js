@@ -6,7 +6,7 @@ import {useRouter} from "next/router";
 import useNavProjects from "@/lib/hooks/useNavProjects";
 import Icons from "@/components/svg-icons/icons";
 import Button from "@/components/button/Button";
-import Link from "@/components/link/Link";
+import Link from "next/link";
 
 export default function Sidebar() {
     const {mutateUser} = useUser({

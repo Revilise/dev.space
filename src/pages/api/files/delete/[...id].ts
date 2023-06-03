@@ -10,7 +10,7 @@ async function DeleteFileById(
     const [id] = req.query.id;
     const userid = req.session.user.id;
 
-    const result = await FilesController.delete(Number(id), userid);
+    const result = await FilesController.Delete({id: Number(id), userid});
 
     res.json({ok: result});
 }

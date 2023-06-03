@@ -1,8 +1,8 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import MembershipController from "@/controllers/MembershipController";
 import {withIronSessionApiRoute} from "iron-session/next";
 import {sessionOptions} from "@/lib/auth/session";
 import {Membership} from "@/models/Membership";
+import MembershipController from "@/controllers/MembershipController";
 
 async function PostDefaultMembership(
     req: NextApiRequest,
@@ -16,7 +16,7 @@ async function PostDefaultMembership(
         userid
     });
 
-    await MembershipController.insert(temp);
+    await MembershipController.Insert(temp);
 
     res.json(true);
 }

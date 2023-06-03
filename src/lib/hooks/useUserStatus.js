@@ -28,7 +28,7 @@ export default function useUserStatus({ projectid }) {
         await mutateMembersip(await (async () => {
             return axios
                 .post("/api/membership/delete/"+projectid)
-                .then(() => statuses.null)
+                .then((res) => { if (res.ok) return statuses.null })
         })())
     }
 

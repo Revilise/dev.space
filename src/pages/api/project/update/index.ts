@@ -9,7 +9,7 @@ function updateProject(
 ) {
     const {project, projectid} = req.body;
 
-    const result = ProjectsController.update(projectid, project);
+    const result = ProjectsController.Update(projectid, project);
 
     res.json({ok: result})
 }

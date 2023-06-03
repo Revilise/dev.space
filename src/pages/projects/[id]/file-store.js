@@ -10,14 +10,8 @@ export default function FileStorePage() {
 
     const {files, removeFile, addFile} = useFiles(router.query.id);
 
-    function SearchHandle(text) {
-        //query
-        //setFiles
-    }
-
     return (
         <ProjectLayout projectId={router.query.id}>
-            <Search onSearch={SearchHandle} />
             <FileLoaderAPI addFile={addFile} />
             <FilesContainer removeFile={removeFile} files={files} />
         </ProjectLayout>

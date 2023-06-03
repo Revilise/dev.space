@@ -1,55 +1,55 @@
-import {IController} from "@/controllers/IController";
-import {File} from "@/models/File";
-import {pool} from "@/databases/postgesql/db-connection";
-import {QueryConfig} from "pg";
+import IController from "@/controllers/IController";
+import {execute} from "@/databases/postgesql/db-connection";
+import {ControllerFetcher} from "@/lib/fetcher";
+import {File} from "@/models/File"
 
-class FilesController implements IController<File> {
-    delete(id: number, userid: number): Promise<boolean> {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default new class FilesController implements IController<File> {
+    Delete(params: object): Promise<boolean> {
+        const {id, userid} = params;
 
-        const text = `
+        if (id && userid) {
+            const text = `
                 DELETE FROM files as f
                 USING Membership as pm
                 WHERE f.projectid = pm.projectid
-                    AND f.id = $1 AND pm.userid = $2; 
-        `
+                    AND f.id = $1 AND pm.userid = $2
+                RETURNING *; 
+            `
+            return execute({text, values: [id, userid]}, ControllerFetcher("bool"))
+        }
 
-        return pool
-                .query({text, values: [id, userid] })
-                .then(res => res.rowCount > 0)
+        return Promise.resolve(false);
     }
 
-    getAll(): Promise<File[]> {
+    GetAll(params: object): Promise<object> {
+        const { projectid } = params;
+
+        if (projectid) {
+            return execute({text: "SELECT * FROM files WHERE projectid = $1;", values: [projectid]}, ControllerFetcher("array"))
+        }
+
         return Promise.resolve([]);
     }
 
-    getById(id: number): Promise<File> {
-        return Promise.resolve(undefined);
+    GetOne(params: object | null): Promise<object | null> {
+        return Promise.resolve(null);
     }
 
-    getAllByProjectId(projectId: number): Promise<File[]> {
-        const text = `
-            SELECT * FROM files WHERE projectid = $1;
-        `;
+    Insert(object: File): Promise<object | null> {
+        if (object) {
+            const {name, type, projectid, size, data} = object;
 
-        return pool
-            .query({text, values: [projectId]})
-            .then(data => data.rows.map(el => File.Parse(el)));
+            const text = `INSERT INTO Files (name, type, size, projectid, data) VALUES($1, $2, $3, $4, $5::bytea) RETURNING *`;
+            const values = [name, type, size, projectid, data];
+
+            return execute({text, values}, ControllerFetcher("one"))
+        }
+
+        return Promise.resolve(null);
     }
 
-    insert(object: File): Promise<object> {
-        const {name, type, projectid, size, data} = object;
-
-        const text = `INSERT INTO Files (name, type, size, projectid, data) VALUES($1, $2, $3, $4, $5::bytea) RETURNING *`;
-        const values = [name, type, size, projectid, data];
-
-        const config: QueryConfig = {text, values};
-        return pool.query(config).then(data => data.rows[0]);
-    }
-
-    update(id: number, object: File): Promise<File> {
-        return Promise.resolve(undefined);
+    Update(id: number, object: File): Promise<boolean> {
+        return Promise.resolve(false);
     }
 }
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default new FilesController();

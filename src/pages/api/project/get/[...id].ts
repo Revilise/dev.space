@@ -6,7 +6,7 @@ import ProjectsController from "@/controllers/ProjectsController";
 async function GetProjectById(req: NextApiRequest, res: NextApiResponse) {
     const {id} = req.query;
 
-    const result = await ProjectsController.getById(Number(id));
+    const result = await ProjectsController.GetOne({id: Number(id)});
 
     res.json(result);
 }

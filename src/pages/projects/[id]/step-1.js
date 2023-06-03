@@ -45,13 +45,9 @@ export default function Step1Page() {
     }
 
    async function save() {
-
-        return axios.post('/api/project/update/', {
+        return await axios.post('/api/project/update/', {
             project,
             projectid: id
-        }).then(res => {
-            console.log(res)
-            return res;
         })
     }
     function onSubmit() {

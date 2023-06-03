@@ -7,8 +7,7 @@ import axios from "axios";
 import useUser from "../lib/hooks/useUser";
 
 import css from '../styles/pages/Auth.module.scss'
-import Link from "../components/link/Link";
-import Popup from "../features/popup/Popup";
+import Link from "next/link";
 
 const fields = [
     {name: "firstname", ru: "имя"},

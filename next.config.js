@@ -9,12 +9,17 @@ const nextConfig = {
       {
         source: '/projects/null/:path*',
         destination: '/',
-        permanent: true,
+        permanent: true
       },
       {
         source: '/projects/undefined/:path*',
         destination: '/',
-        permanent: true,
+        permanent: true
+      },
+      {
+        source: '/projects',
+        destination: '/',
+        permanent: true
       }
     ];
   },
